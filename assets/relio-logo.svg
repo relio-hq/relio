@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <title>Relio</title>
+  <rect width="512" height="512" rx="112" fill="#0EA5E9"/>
+  <!-- relationship line flowing from an entity into a crow's foot (one-to-many) -->
+  <g fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-width="34">
+    <path d="M160 330 C250 330 226 256 300 256"/>
+    <path d="M300 256 Q344 256 370 196"/>
+    <path d="M300 256 H384"/>
+    <path d="M300 256 Q344 256 370 316"/>
+  </g>
+  <!-- entity node -->
+  <circle cx="150" cy="330" r="56" fill="#FFFFFF"/>
+  <circle cx="150" cy="330" r="20" fill="#0EA5E9"/>
+</svg>

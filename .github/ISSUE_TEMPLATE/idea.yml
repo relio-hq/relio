@@ -1,0 +1,18 @@
+name: 아이디어 / Idea
+description: 불편한 점이나 바라는 기능을 알려 주세요 / Suggest an improvement
+labels: ["idea"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        회사 파일·화면 캡처는 올리지 마세요. / Don't attach company files or screenshots.
+  - type: textarea
+    id: problem
+    attributes:
+      label: 무엇이 불편한가요? / What problem are you running into?
+    validations:
+      required: true
+  - type: textarea
+    id: wish
+    attributes:
+      label: 어떻게 되면 좋을까요? / What would you like instead?

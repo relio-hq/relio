@@ -1,0 +1,51 @@
+name: 버그 / Bug
+description: 잘못 동작하는 것을 알려 주세요 / Report something that doesn't work
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **회사 `.erm` 파일이나 화면 캡처를 올리지 마세요.** 테이블 구조 자체가 회사 정보예요. 파일 때문에 생긴 문제라면 샘플 파일로 재현해 보거나, 앱의 도움말 › 문제 보고 › "익명화 사본 저장…"으로 만든 사본을 zip으로 묶어 붙여 주세요.
+        **Don't attach company `.erm` files or screenshots.** The table structure itself is company information. If a file causes the problem, try to reproduce it with a sample file, or attach a copy made with Help › Report a problem › "Save anonymized copy…" in the app (zip it first).
+  - type: input
+    id: version
+    attributes:
+      label: Relio 버전 / Relio version
+      placeholder: "0.13.0"
+    validations:
+      required: true
+  - type: input
+    id: os
+    attributes:
+      label: Windows 버전 / Windows version
+      placeholder: "Windows 11 23H2"
+  - type: dropdown
+    id: sample
+    attributes:
+      label: 샘플 파일로도 재현되나요? / Does it happen with a sample file?
+      options:
+        - 예, PostgreSQL 샘플 / Yes, PostgreSQL sample
+        - 예, MySQL 샘플 / Yes, MySQL sample
+        - 아니요 / No
+        - 안 해 봄 / Not tried
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: 재현 순서 / Steps to reproduce
+      placeholder: |
+        1. 
+        2. 
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 기대한 것 / Expected behavior
+  - type: textarea
+    id: actual
+    attributes:
+      label: 실제로 일어난 것 / Actual behavior
+    validations:
+      required: true
