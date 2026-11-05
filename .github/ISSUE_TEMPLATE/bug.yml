@@ -49,3 +49,9 @@ body:
       label: 실제로 일어난 것 / Actual behavior
     validations:
       required: true
+  - type: textarea
+    id: log
+    attributes:
+      label: 진단 기록 (선택) / Diagnostic log (optional)
+      description: 앱의 도움말 › 문제 보고 › "최근 기록 복사"로 복사한 글을 붙여 주세요. 파일 내용·이름·경로는 들어 있지 않아요. / Paste the text from Help › Report a problem › "Copy recent log" in the app. It contains no file contents, names or paths.
+      render: text
