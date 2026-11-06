@@ -150,7 +150,7 @@ When the same `.erm` was changed in two places, Relio merges by model object (ta
 
 Tools › Settings. Changes are saved immediately.
 
-- **General**: display language (한국어 · English · 日本語 · 中文; empty means the system language — Japanese and Chinese only have the text translated up to 0.12.0, and newer text appears in English), theme (system, light or dark — the diagram itself is always drawn in light colors), automatic backup interval, reopening the last documents, cleaning up per-file records, and highlight (connection highlight, dim level, flashing, reduce motion).
+- **General**: display language (한국어 · English · 日本語 · 中文; empty means the system language — Japanese and Chinese only have the text translated up to 0.12.0, and newer text appears in English), theme (system, light, dark, Cherry blossom, Lavender, Everforest, Catppuccin Mocha or Frost — node colors such as tables are drawn as in the light theme for light themes and as in the dark theme for dark ones; exports and printing always use light colors), automatic backup interval, reopening the last documents, cleaning up per-file records, and highlight (connection highlight, dim level, flashing, reduce motion).
 - **Global groups**: column groups shared by several files.
 - **Translation dictionary**: the list and order of dictionaries used for database import.
 - **Excel template**: save built-in templates to files, register your own templates.
@@ -252,7 +252,7 @@ Relio never connects to the internet on its own, and never sends usage data, err
 - Known ERMaster problems are fixed. For example: saving and reopening files with views or self-referencing relationships, DDL syntax that failed on some databases, quotes and empty values in test data SQL, objects from other databases mixed into a MySQL import, and the translation dictionary changing letter case.
 - Excel output is `.xlsx` (ERMaster `.xls` templates still work).
 - Database passwords are stored in the Windows Credential Manager by default, not in the `.erm`.
-- The interface is in Korean and English. Japanese and Chinese are partial; untranslated text appears in English. You can choose a light or dark theme.
+- The interface is in Korean and English. Japanese and Chinese are partial; untranslated text appears in English. You can choose light, dark, Cherry blossom, Lavender, Everforest, Catppuccin Mocha or Frost themes.
 - Git merge conflicts are resolved by model object (`relio merge` also works as a Git merge driver), and there are design checks, suggestions while typing and find bar highlights.
 - You can export to DBML, Mermaid, Markdown and model JSON, and import from SQL (`CREATE TABLE`), DBML, Mermaid and Markdown.
 - Usage data, error reports and file contents are never sent anywhere. Every feature works without the internet.

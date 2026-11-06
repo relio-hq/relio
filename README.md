@@ -59,12 +59,12 @@ Ctrl+F 찾기 막대에 "ㅈㅁ"만 쳐도 "주문"을 찾아요. 테이블·컬
 | ✅ | **Git과 함께** — 정렬 저장으로 작은 차이, 두 모델 비교, 커밋 이력, 모델 단위 합치기 |
 | ✅ | **명령줄** — `relio export`·`import`·`diff`·`merge`·`lint`·`db`, 빌드·CI용 종료 코드 |
 | ✅ | **안전하게** — 모든 편집 되돌리기, 자동 백업과 복구, 망가진 파일도 고칠 수 있는 데까지 고쳐서 열기 |
-| ✅ | **편하게** — 밝은·어두운 테마, 한국어·영어 화면, 단축키 바꾸기, 앱 안 사용 설명서 |
+| ✅ | **편하게** — 밝은·어두운 테마와 벚꽃·라벤더·Everforest·Catppuccin Mocha·서리 테마, 한국어·영어 화면, 단축키 바꾸기, 앱 안 사용 설명서 |
 | ✅ | **인터넷 없이·무료** — 모든 기능이 오프라인으로 동작하고, 사용 기록이나 파일 내용을 밖으로 보내지 않아요 |
 
 ## 설치
 
-Windows 설치 파일 **`Relio_<버전>_x64-setup.exe`** 하나로 설치해요(예: `Relio_1.0.0-beta.3_x64-setup.exe`). 무료예요. 지금 있는 기능은 앞으로도 계속 무료예요.
+Windows 설치 파일 **`Relio_<버전>_x64-setup.exe`** 하나로 설치해요(예: `Relio_1.0.0-beta.4_x64-setup.exe`). 무료예요. 지금 있는 기능은 앞으로도 계속 무료예요.
 
 1. 이 저장소의 **[Releases](../../releases/latest)**에서 최신 설치 파일을 받아 실행해요. 설치 없이 쓰려면 `Relio_<버전>_x64_portable.zip`을 받아 압축을 풀고 `relio.exe`를 실행하세요.
 2. 처음 실행할 때 Windows가 **"Windows의 PC 보호"** 창을 띄우면 **추가 정보 → 실행**을 누르세요. Relio 설치 파일은 아직 코드 서명을 하지 않아서 나오는 경고예요. 받은 곳이 맞는지 먼저 확인하세요.
@@ -99,8 +99,8 @@ Windows 설치 파일 **`Relio_<버전>_x64-setup.exe`** 하나로 설치해요(
 | **캔버스** — 테이블·관계·노트·카테고리, 오른쪽 아웃라인과 미니맵 | **테이블 정보** — 컬럼·키·인덱스·제약을 한 창에서 |
 | <img src="assets/screens/ddl-preview.png" alt="DDL 내보내기 창과 PostgreSQL 17 미리보기"> | <img src="assets/screens/db-import.png" alt="DB에서 가져오기: 접속한 PostgreSQL의 테이블 목록"> |
 | **DDL 미리보기** — DB와 버전을 고르면 바로 바뀌어요 | **DB에서 가져오기** — 접속해서 테이블을 골라 모델로 |
-| <img src="assets/screens/excel-table-definition.png" alt="Excel 테이블 정의서: 컬럼 목록과 인덱스"> | <img src="assets/screens/dark-theme.png" alt="어두운 테마"> |
-| **Excel 테이블 정의서** — 한국어 기본 양식 | **어두운 테마** — 환경 설정에서 고르거나 Windows 설정을 따라요(다이어그램은 밝은 바탕) |
+| <img src="assets/screens/excel-table-definition.png" alt="Excel 테이블 정의서: 컬럼 목록과 인덱스"> | <img src="assets/screens/theme-sakura.png" alt="벚꽃 테마를 고른 화면"> |
+| **Excel 테이블 정의서** — 한국어 기본 양식 | **테마 7가지** — 밝게·어둡게와 벚꽃·라벤더·Everforest·Catppuccin Mocha·서리. 환경 설정에서 고르거나 Windows 설정을 따라요 |
 
 
 ## ERMaster와 다른 점

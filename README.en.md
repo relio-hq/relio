@@ -59,7 +59,7 @@ Hover over a table, relationship line or column, and the connected lines and tab
 | ✅ | **Git friendly** — sorted saving for small diffs, model comparison, commit history, merging by model object |
 | ✅ | **Command line** — `relio export`, `import`, `diff`, `merge`, `lint` and `db`, with exit codes for builds and CI |
 | ✅ | **Safe** — undo for every edit, automatic backup and recovery, damaged files repaired as far as possible |
-| ✅ | **Comfortable** — light and dark themes, Korean and English interface, custom shortcuts, built-in user guide |
+| ✅ | **Comfortable** — light and dark themes plus Cherry blossom, Lavender, Everforest, Catppuccin Mocha and Frost, Korean and English interface, custom shortcuts, built-in user guide |
 | ✅ | **Offline and free** — every feature works without the internet, and no usage data or file contents are sent anywhere |
 
 ## Install
