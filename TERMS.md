@@ -11,6 +11,7 @@
 7. 이 조건은 바뀔 수 있고, 바뀌면 새 버전과 함께 알려 드려요. 이미 받은 버전은 받을 때의 조건을 따라요.
 
 ERMaster는 원 저작자의 프로젝트이며, Relio는 그 파일 형식과 호환되도록 독립적으로 만든 별개의 도구입니다.
+Windows·PostgreSQL·MySQL·Oracle 등 제품 이름은 각 소유자의 상표입니다.
 
 ## English
 
@@ -23,3 +24,4 @@ ERMaster는 원 저작자의 프로젝트이며, Relio는 그 파일 형식과 �
 7. These terms may change; changes will be announced with a new version. A version you already have stays under the terms it came with.
 
 ERMaster is a project of its original authors. Relio is a separate tool built independently to be compatible with its file format.
+Windows, PostgreSQL, MySQL, Oracle and other product names are trademarks of their respective owners.

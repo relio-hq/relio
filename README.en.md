@@ -111,6 +111,7 @@ Shortcuts, database connections, merging and design checks, the command line (ex
 ## Report a problem · Suggest an idea
 
 - Open an **[issue](../../issues/new/choose)** with the "Bug" or "Idea" form. In the app, **Help › Report a problem** opens the bug form with your Relio version and Windows version filled in (or use "Copy report details" if you can't use GitHub).
+- If the app froze or closed unexpectedly, use **"Copy recent log"** in the Report a problem window to copy the diagnostic log (it contains no file contents, names or paths) and paste it into the issue. It helps us find the cause much faster.
 - First check whether **the same problem happens with a sample file**. If it does, we can fix it much faster.
 - **Don't attach company `.erm` files or screenshots.** The table structure itself is company information. If a file causes the problem, try to reproduce it with a sample file, or use **"Save anonymized copy…"** in the Report a problem window to make a copy without names and descriptions (only the structure stays) and attach it as a zip file.
 - Report security problems privately via **Security › Report a vulnerability** in this repository, not in a public issue.
@@ -123,3 +124,4 @@ Relio is free for individuals and companies. You may share the unmodified instal
 ---
 
 ERMaster is a project of its original authors. Relio is a separate tool built independently to be compatible with its file format.
+Windows, PostgreSQL, MySQL, Oracle and other product names are trademarks of their respective owners.

@@ -150,7 +150,7 @@ Relio는 ERMaster(`.erm`) 파일을 그대로 열고 저장하는 ERD·데이터
 
 도구 › 환경 설정. 바꾸는 즉시 저장됩니다.
 
-- **일반**: 표시 언어(한국어 · English · 日本語 · 中文, 비우면 OS 언어 — 일본어 · 중국어는 0.12.0까지 번역한 문구만 있고 새 문구는 영어로 나옵니다), 테마(시스템·밝게·어둡게·벚꽃·라벤더·Everforest·Catppuccin Mocha·서리 — 테이블 같은 노드 색은 밝은 테마면 밝게, 어두운 테마면 어둡게와 같이 그리고, 내보내기·인쇄는 늘 밝은 색), 자동 백업 간격, 마지막 문서 다시 열기, 파일별 기록 정리, 강조(연결 강조·흐림 정도·깜빡임·움직임 줄이기).
+- **일반**: 표시 언어(한국어 · English · 日本語 · 中文, 비우면 OS 언어 — 일본어 · 중국어는 0.12.0까지 번역한 문구만 있고 새 문구는 영어로 나옵니다), 테마(시스템·낮·밤·벚꽃·라벤더·숲·모카·서리 — 테이블 같은 노드 색은 밝은 테마면 낮과 같이 그리고, 어두운 테마(모카·서리)는 창·메뉴·패널만 테마 색이고 캔버스는 기본 어두운 캔버스 그대로이며, 내보내기·인쇄는 늘 밝은 색. 벚꽃·라벤더·숲·모카·서리는 Windows 11에서 창 제목 줄도 테마 색), 캔버스 색(테마·낮 — 낮이면 어두운 테마에서도 캔버스를 밝게), 자동 백업 간격, 마지막 문서 다시 열기, 파일별 기록 정리, 강조(연결 강조·흐림 정도·깜빡임·움직임 줄이기).
 - **글로벌 그룹**: 여러 파일이 함께 쓰는 컬럼 그룹.
 - **번역 사전**: DB 가져오기에 쓸 사전 목록과 순서.
 - **Excel 템플릿**: 내장 템플릿 파일로 저장, 사용자 템플릿 등록.
@@ -187,17 +187,19 @@ relio db import --db MySQL --database shop --user dev --output shop.erm
 - **`relio import <형식>`**: 형식은 `auto` · `ddl` · `dbml` · `mermaid` · `markdown`, `--input`은 파일 또는 `-`(표준 입력), `--output`은 새 `.erm`(이미 있으면 `--force`가 있어야 덮어씀). `--dialect`(SQL 방언) · `--db`(새 문서 DB) · `--comment auto|description|logical` · `--name-case asis|db` · `--encoding` · `--strict`(경고가 있으면 만들지 않음). 경고는 표준 오류에 `<입력>:<줄>:<열>: 경고: <내용>` 꼴로 나옵니다.
 - **`relio diff`**: `relio diff A.erm B.erm`, `relio diff --rev REV 파일.erm`(Git 저장소의 그 버전 ↔ 디스크), `relio diff --rev REV1 --rev REV2 파일.erm`. `--format markdown|json|csv`, `--output`(`-`이면 표준 출력), `--include structure,docs,layout,settings`, `--lang`, `--exit-code`(차이가 있으면 4). 저장소에 아무것도 쓰지 않고 네트워크에 접속하지 않습니다. Git 비교 도구로 쓸 수 있습니다: `git difftool -x "relio diff" -- 모델.erm`.
 - **`relio merge`**: `relio merge 바탕.erm 내쪽.erm 바깥쪽.erm -o 결과.erm`. 결과 파일에는 충돌 표시를 넣지 않고(늘 올바른 `.erm`), 충돌이 남으면 `--on-conflict ours|theirs`(기본 ours) 쪽 값을 넣고 종료 코드 5로 끝납니다. `--keep-numbers ours|theirs`(번호를 지킬 쪽), `--report <경로|->` · `--report-format markdown|json`(충돌·자동 항목 보고서), `--label-base` · `--label-ours` · `--label-theirs`(이름표), `--no-sort`(정렬 저장 끄기), `--lang`. `-o`는 내 쪽 입력과 같은 경로여도 됩니다. 저장소에는 아무것도 쓰지 않습니다.
-- **Git merge driver**: 저장소의 `.gitattributes`에 한 줄을 넣고 Git 설정에 드라이버를 등록하면 `git merge`·`git rebase`가 `.erm`을 모델 단위로 합칩니다. 충돌이 남으면(종료 코드 5) Git은 그 파일을 충돌로 남기고, Relio에서 열어 파일 › 비교·병합 › Git 병합 충돌 풀기…로 마저 풉니다. 설치 파일은 `relio`를 PATH에 넣지 않으므로 Windows에서는 설치 폴더의 전체 경로를 `/`로 적고 따옴표로 감쌉니다(아래 예). `.gitattributes`에는 `-text`도 함께 적어 Git이 `.erm`의 줄 끝을 바꾸지 않게 합니다(Relio와 ERMaster의 줄 끝이 달라 파일 전체가 바뀐 것으로 보이지 않게). 드라이버는 Git 설정이라 저장소에 따라가지 않으니 **ERMaster를 쓰는 팀원을 포함해 병합하는 사람 모두** 자기 PC에 등록해야 합니다(등록하지 않은 사람의 `git merge`는 줄 단위로 합쳐 충돌 표시가 남음).
+- **Git merge driver**: 저장소의 `.gitattributes`에 한 줄을 넣고 Git 설정에 드라이버를 등록하면 `git merge`·`git rebase`가 `.erm`을 모델 단위로 합칩니다. 충돌이 남으면(종료 코드 5) Git은 그 파일을 충돌로 남기고, Relio에서 열어 파일 › 비교·병합 › Git 병합 충돌 풀기…로 마저 풉니다. 설치 파일은 `relio`를 PATH에 넣지 않으므로 Windows에서는 설치 폴더의 `relio.exe` 전체 경로를 `/`로 적고 따옴표로 감쌉니다(아래 첫 예). `.gitattributes`에는 `text eol=lf`도 함께 적어 커밋 안의 줄 끝을 LF로 맞춥니다 — ERMaster(CRLF)와 Relio(LF)를 섞어 쓰는 팀에서 줄 끝 차이 때문에 병합·저장마다 파일 전체가 바뀐 것으로 잡히지 않게. `--label-base %S`는 보고서의 바탕 이름표를 Git 임시 파일 이름 대신 공통 조상 이름으로 씁니다. 드라이버는 Git 설정이라 저장소에 따라가지 않으니 **ERMaster를 쓰는 팀원을 포함해 병합하는 사람 모두** 자기 PC에 등록해야 합니다(등록하지 않은 사람의 `git merge`는 줄 단위로 합쳐 충돌 표시가 남음). **주의**: 등록했지만 Git이 드라이버를 찾지 못하면(경로가 틀림 — 출력에 `relio: command not found` 같은 줄) Git은 충돌 표시 없이 **내 쪽 파일만 남긴 채** 충돌로 표시합니다. 그대로 `git add`하면 바깥 쪽 변경이 사라지니, 등록한 뒤 `git config --get merge.relio.driver`의 경로를 그대로 붙여 `"…/relio.exe" --version`이 판 번호를 내는지, `git check-attr merge -- 모델.erm`이 `merge: relio`인지 확인하세요.
 
 ```
 # .gitattributes
-*.erm merge=relio -text
+*.erm text eol=lf merge=relio
 
 git config merge.relio.name "Relio model merge"
-git config merge.relio.driver "relio merge %O %A %B -o %A --label-ours %X --label-theirs %Y"
 
-# Windows (Git Bash) — relio가 PATH에 없을 때
-git config merge.relio.driver '"C:/Users/<사용자>/AppData/Local/Relio/relio.exe" merge %O %A %B -o %A --label-ours %X --label-theirs %Y'
+# Windows (Git Bash) — 설치된 relio.exe 전체 경로
+git config merge.relio.driver '"C:/Users/<사용자>/AppData/Local/Relio/relio.exe" merge %O %A %B -o %A --label-base %S --label-ours %X --label-theirs %Y'
+
+# relio가 PATH에 있을 때
+git config merge.relio.driver "relio merge %O %A %B -o %A --label-base %S --label-ours %X --label-theirs %Y"
 ```
 
 - **`relio lint`**: `relio lint 모델.erm`. `--format text|markdown|json`, `--output`(기본 `-` 표준 출력), `--fail-on error|warning|info|none`(이 심각도 이상 지적이 있으면 종료 코드 6, 기본 warning), `--disable`·`--only`(쉼표로 구분한 규칙 ID — 예: `pk-missing`, `fk-no-index`, `reserved-word`), `--db-version`, `--lang`. 앱에서 예외로 한 것은 적용되지 않으므로(어느 PC에서나 같은 결과) 규칙은 `--disable`로 끕니다. `relio export ddl`도 DDL 실행을 실패하게 하는 오류가 있으면 표준 오류에 한 줄 알립니다.
@@ -252,7 +254,7 @@ Relio는 인터넷에 스스로 접속하지 않고, 사용 기록 · 오류 보
 - ERMaster의 알려진 문제를 고쳐서 동작합니다. 예: 뷰나 재귀 관계가 있는 파일을 저장·다시 열기, DB별로 실행 오류가 나던 DDL 문법, 테스트 데이터 SQL의 따옴표·빈 값, MySQL 가져오기에 다른 DB 객체가 섞이던 문제, 번역 사전이 대소문자를 바꾸던 문제.
 - Excel 출력은 `.xlsx`입니다(ERMaster `.xls` 템플릿은 그대로 쓸 수 있습니다).
 - DB 암호는 기본으로 `.erm`이 아니라 Windows 자격 증명 관리자에 저장합니다.
-- 화면은 한국어 · English이고(日本語 · 中文은 일부 — 나머지는 영어로 나옴) 테마(밝게·어둡게와 벚꽃·라벤더·Everforest·Catppuccin Mocha·서리)를 고를 수 있습니다.
+- 화면은 한국어 · English이고(日本語 · 中文은 일부 — 나머지는 영어로 나옴) 테마(낮·밤과 벚꽃·라벤더·숲·모카·서리)를 고를 수 있습니다.
 - Git 병합 충돌을 모델 단위로 풀고(`relio merge`는 Git merge driver로도 씀), 설계 검사·입력 중 추천·찾기 막대 강조가 있습니다.
 - DBML · Mermaid · Markdown · 모델 JSON으로 내보내고, SQL(`CREATE TABLE`) · DBML · Mermaid · Markdown에서 가져올 수 있습니다.
 - 사용 기록·오류 보고·파일 내용을 밖으로 보내지 않습니다. 모든 기능이 인터넷 없이 동작합니다.
