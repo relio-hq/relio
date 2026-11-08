@@ -123,5 +123,5 @@ Relio is free for individuals and companies. You may share the unmodified instal
 
 ---
 
-ERMaster is a project of its original authors. Relio is a separate tool built independently to be compatible with its file format.
+Relio is a separate tool, not affiliated with ERMaster. It was written from scratch without using ERMaster source code and is only compatible with the ERMaster file format (.erm). ERMaster is a project of its developers.
 Windows, PostgreSQL, MySQL, Oracle and other product names are trademarks of their respective owners.

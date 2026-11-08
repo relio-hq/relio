@@ -136,5 +136,5 @@ Relio는 ERMaster의 기능을 모두 하되, 알려진 문제는 고쳐서 동�
 
 ---
 
-ERMaster는 원 저작자의 프로젝트이며, Relio는 그 파일 형식과 호환되도록 독립적으로 만든 별개의 도구입니다.
+Relio는 ERMaster와 관계없는 별개의 도구입니다. ERMaster의 소스 코드를 쓰지 않고 새로 만들었으며, ERMaster 파일 형식(.erm)과 호환되도록 했을 뿐입니다. ERMaster는 그 개발자들의 프로젝트입니다.
 Windows·PostgreSQL·MySQL·Oracle 등 제품 이름은 각 소유자의 상표입니다.

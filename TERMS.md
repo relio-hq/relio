@@ -10,7 +10,7 @@
 6. **"Relio" 이름과 로고**는 Relio 개발자의 것이에요. 허락 없이 다른 제품 이름으로 쓰지 마세요.
 7. 이 조건은 바뀔 수 있고, 바뀌면 새 버전과 함께 알려 드려요. 이미 받은 버전은 받을 때의 조건을 따라요.
 
-ERMaster는 원 저작자의 프로젝트이며, Relio는 그 파일 형식과 호환되도록 독립적으로 만든 별개의 도구입니다.
+Relio는 ERMaster와 관계없는 별개의 도구입니다. ERMaster의 소스 코드를 쓰지 않고 새로 만들었으며, ERMaster 파일 형식(.erm)과 호환되도록 했을 뿐입니다. ERMaster는 그 개발자들의 프로젝트입니다.
 Windows·PostgreSQL·MySQL·Oracle 등 제품 이름은 각 소유자의 상표입니다.
 
 ## English
@@ -23,5 +23,5 @@ Windows·PostgreSQL·MySQL·Oracle 등 제품 이름은 각 소유자의 상표�
 6. **The Relio name and logo** belong to the Relio developer. Don't use them as the name of another product without permission.
 7. These terms may change; changes will be announced with a new version. A version you already have stays under the terms it came with.
 
-ERMaster is a project of its original authors. Relio is a separate tool built independently to be compatible with its file format.
+Relio is a separate tool, not affiliated with ERMaster. It was written from scratch without using ERMaster source code and is only compatible with the ERMaster file format (.erm). ERMaster is a project of its developers.
 Windows, PostgreSQL, MySQL, Oracle and other product names are trademarks of their respective owners.
