@@ -5,14 +5,15 @@ Relio is an ERD and database modeling tool that opens and saves ERMaster (`.erm`
 ## Getting started
 
 - **Open an existing file**: File › Open… (Ctrl+O), or drag an `.erm` file onto the window. Opening a file that is already open takes you to its tab. Several files open as tabs.
-- **Create a new one**: File › New diagram (Ctrl+N) and choose the database type. You choose the location and name when you save for the first time.
+- **Create a new one**: File › New diagram (Ctrl+N) and choose the database type and the target version (for MySQL, also MySQL or MariaDB). Without a version, the minimum version of that database is assumed. You choose the location and name when you save for the first time. The target version is not stored in the `.erm`; it is remembered per file in this PC's settings, and you can change it at any time by clicking the left end of the status bar (for example "PostgreSQL 16").
 - **Open a sample**: on the start screen or in Help › Open sample, choose PostgreSQL (online bookstore, 19 tables) or MySQL (users and permissions, 16 tables). The samples are built into the app, so they open without an internet connection, and they open as a new untitled document (a copy), so your changes never touch the sample. Saving opens the Save as dialog. When you report a problem, reproducing it with a sample helps us check it quickly.
 - **Physical name, logical name and word**: the **physical name** is the name the database uses (`EMP_NO` — it goes into the DDL, usually letters, digits and `_`). The **logical name** is the name people read (`Employee number` — shown on screen, in documents and in DDL comments, any language). The View menu chooses which one the canvas shows. A **word** is an entry of the word dictionary (physical name, logical name, type, length and description together); columns point to a word, so columns that share a word change together. When you type only the physical name, the logical name follows it (or takes the logical name of a dictionary word with the same physical name) until you edit the logical name yourself.
 - **Save**: File › Save (Ctrl+S) · Save as… (Ctrl+Shift+S). Relio writes a temporary file completely and then swaps it in, so the original file is not damaged even if the app stops while saving.
 - **Opening damaged files**: a damaged file is repaired as far as possible and opened, and what was repaired is shown in a window and in the problem list. Items marked "Needs review" are shown first in yellow.
 - **Automatic backup**: while there are unsaved changes, Relio keeps the latest 10 copies per file in the `backup` folder of the settings folder at a set interval (5 minutes by default). If Relio stopped unexpectedly, it offers to recover the next time it starts.
 - **Recent files**: File › Recent files shows each file name with its folder. "Clear list" at the bottom empties it.
-- To reopen last session's documents at startup, turn this on in Tools › Settings › General.
+- **After a restart**: the files that were open when you quit are reopened in the same tab order, with the tab you were viewing in front. Files that no longer exist are skipped, and if none are left you get the start screen. To turn this off, clear "Reopen last session's documents at startup" in Tools › Settings › General.
+- **Back to the start screen**: with files open, choose View › Start screen to see the start screen again (new, open, samples, recent files). Open documents stay open; click a tab or press Esc to go back.
 
 ## Keyboard shortcuts
 
@@ -36,6 +37,7 @@ Help › Keyboard shortcuts lists them all; change them in Tools › Settings �
 | Zoom (mouse) | Ctrl+mouse wheel |
 | Pan the view | Hold Space and drag |
 | Next / previous document tab | Ctrl+Tab / Ctrl+Shift+Tab |
+| Show or hide right panel / bottom panel · Maximize canvas | Ctrl+Alt+B / Ctrl+J · Ctrl+Shift+M |
 | Tools: select · table · view · 1:N relationship · note · category | V · T · W · R · N · C |
 | Move the selection | Arrow keys (1) / Shift+arrow keys (10) |
 | User guide | F1 |
@@ -50,7 +52,8 @@ Help › Keyboard shortcuts lists them all; change them in Tools › Settings �
 - **Problem list** (bottom): design check findings (errors, warnings and info), file repairs, and DDL export warnings. Click an item to go to the object and highlight it briefly; double-click to open its properties. Clicking "Problems: Error n · Warning n" in the status bar also opens it (or View › Panels › Problem list).
 - **Document tabs** (top): one tab per open file. Drag a tab to reorder. Right-click a tab for Close · Close other tabs · Close all · Copy path · Show in folder. A middle click closes the tab.
 - **Category tabs** (bottom): "All" plus one tab per category. A category tab shows only the objects in that category (turn on Model › Category › Show referencing tables to also show referencing tables, dimmed).
-- **Status bar**: database type, number of tables, columns and relationships, and zoom.
+- **Hiding panels**: the two buttons at the right end of the document tab bar (or Ctrl+Alt+B and Ctrl+J, or View › Panels) show or hide the right panel (outline and minimap) and the bottom panel (problem list) separately. Double-click a document tab to hide both at once and give the canvas the whole window; double-click again to go back to how the panels were. The state is kept the next time you start.
+- **Status bar**: target database and version (click to change), number of tables, columns and relationships, and zoom.
 
 ## Drawing and editing
 
@@ -112,7 +115,7 @@ When the same `.erm` was changed in two places, Relio merges by model object (ta
 
 ## Export
 
-- Choose the kind in File › Export. The settings you choose are saved in the document.
+- Choose the kind in File › Export. The settings you choose are saved in the document. When a file is created, a short notice appears at the bottom right; **Open folder** opens the folder in the file manager with that file selected (the same goes for Save as and saving an anonymized copy).
 - **Excel**: 4 built-in templates (Korean table definition, English, Japanese, Chinese) and your own templates (`.xlsx`, or ERMaster `.xls`). The output is `.xlsx`. Register your templates in Tools › Settings › Excel template; you can also save a built-in template to a file and edit it.
 - **HTML**: a static document you can read offline (diagram, tables, columns, indexes).
 - **Image**: PNG · JPG · BMP · SVG, with margins and per-category images.
