@@ -64,7 +64,7 @@ Ctrl+F 찾기 막대에 "ㅈㅁ"만 쳐도 "주문"을 찾아요. 테이블·컬
 
 ## 설치
 
-Windows 설치 파일 **`Relio_<버전>_x64-setup.exe`** 하나로 설치해요(예: `Relio_1.0.0-beta.6_x64-setup.exe`). 무료예요. 지금 있는 기능은 앞으로도 계속 무료예요.
+Windows 설치 파일 **`Relio_<버전>_x64-setup.exe`** 하나로 설치해요(예: `Relio_1.0.0-beta.7_x64-setup.exe`). 무료예요. 지금 있는 기능은 앞으로도 계속 무료예요.
 
 1. 이 저장소의 **[Releases](../../releases/latest)**에서 최신 설치 파일을 받아 실행해요. 설치 없이 쓰려면 `Relio_<버전>_x64_portable.zip`을 받아 압축을 풀고 `relio.exe`를 실행하세요.
 2. 처음 실행할 때 Windows가 **"Windows의 PC 보호"** 창을 띄우면 **추가 정보 → 실행**을 누르세요. Relio 설치 파일은 아직 코드 서명을 하지 않아서 나오는 경고예요. 받은 곳이 맞는지 먼저 확인하세요.

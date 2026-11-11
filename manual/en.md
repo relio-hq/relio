@@ -61,6 +61,7 @@ Help › Keyboard shortcuts lists them all; change them in Tools › Settings �
 - **Relationships**: with 1:N relationship (R), drag from the parent table and drop on the child table, or click the parent table and then the child table; FK columns are created following the parent's primary key (an empty spot or Esc cancels). To use columns that already exist, use "Relationship using existing columns". An N:M relationship creates an intersection table between two tables. A self-referencing relationship uses one table.
 - **Categories**: drag with the category tool (C) to make an area. Objects placed inside the area belong to that category.
 - **Select and move**: click, Shift+click to add, drag on empty space to select several. Arrow keys move by 1, Shift+arrow keys by 10. Drag a connector to add bend points; Arrange › Right-angle connectors · Restore defaults.
+- **Table size**: select a table or view and drag the left or right handle to change its width. You can widen it freely, and narrow it down to the width that shows all of its content. The height always fits the columns. A table with no columns shows a faint "Double-click to add columns".
 - **Arrange menu**: align (left, center, right, top, bottom), same width or height, distribute horizontally or vertically, auto size, background color, font.
 - **Copy and paste**: objects can be pasted into another document as well. Copy selected columns to paste them into another table.
 - **Undo**: every edit can be undone with Ctrl+Z and redone with Ctrl+Y.
