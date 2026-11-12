@@ -26,7 +26,7 @@ Git merge conflicts and files changed outside Relio are merged by table, column 
 
 <p align="center"><img src="assets/screens/check.gif" width="860" alt="A table named with a reserved word gets an error mark and a count in the status bar, then a collapsed info group in the problem list is expanded and a missing foreign key index is created with its Fix button"></p>
 
-14 rules — no primary key, foreign key without an index, reserved words, empty physical names or types, duplicate table names and more — run after every edit. Errors and warnings get a mark on the canvas and a count in the status bar. Info findings such as a foreign key without an index stay out of the way, collapsed to one line per rule in the problem list. Fix any finding there with one button, or ignore it. Nothing is blocked, and ignores are recorded on this PC, not in the `.erm`. Run the same checks in CI with `relio lint`.
+15 rules — no primary key, foreign key without an index, reserved words, empty physical names or types, duplicate table names and more — run after every edit. Errors and warnings get a mark on the canvas and a count in the status bar. Info findings such as a foreign key without an index stay out of the way, collapsed to one line per rule in the problem list. Fix any finding there with one button, or ignore it. Nothing is blocked, and ignores are recorded on this PC, not in the `.erm`. Run the same checks in CI with `relio lint`.
 
 ### 3. Type a column name and get the columns you already use
 
@@ -58,6 +58,7 @@ Hover over a table, relationship line or column, and the connected lines and tab
 | ✅ | **Other formats** — import SQL (`pg_dump`, `mysqldump`), DBML, Mermaid and Markdown; export DBML, Mermaid and JSON |
 | ✅ | **Git friendly** — sorted saving for small diffs, model comparison, commit history, merging by model object |
 | ✅ | **Command line** — `relio export`, `import`, `diff`, `merge`, `lint` and `db`, with exit codes for builds and CI |
+| ✅ | **Workflow** — reopen the tabs you had open, collapse panels for a bigger canvas (double-click a document tab), open the folder of an exported file, a target database version per file |
 | ✅ | **Safe** — undo for every edit, automatic backup and recovery, damaged files repaired as far as possible |
 | ✅ | **Comfortable** — light and dark themes plus Cherry blossom, Lavender, Everforest, Catppuccin Mocha and Frost, Korean and English interface, custom shortcuts, built-in user guide |
 | ✅ | **Offline and free** — every feature works without the internet, and no usage data or file contents are sent anywhere |
@@ -79,7 +80,7 @@ Install with a single Windows installer, **`Relio_<version>_x64-setup.exe`**. Re
 
 1. **Try a sample** — Choose "Open sample" on the start screen: a PostgreSQL sample (online bookstore) or a MySQL sample (membership and permissions). They cover relationships, indexes, views and test data, so they are good for exploring. Download: [PostgreSQL](assets/samples/bookstore-postgresql.erm) · [MySQL](assets/samples/membership-mysql.erm)
 2. **Open a file** — "Open file" on the start screen (Ctrl+O), or drag an `.erm` file onto the window. Multiple files open in tabs.
-3. **Create a model** — "New diagram" (Ctrl+N), then choose a database. You pick the location the first time you save.
+3. **Create a model** — "New diagram" (Ctrl+N), then choose a database and its target version (if unsure, leave the version as is). You pick the location the first time you save.
 4. **Draw a table** — Pick the table tool on the left and click the canvas. Double-click a table (or press Enter) to add columns.
 5. **Connect a relationship** — Drag from the parent table to the child table with the relationship tool. The foreign key column is added automatically.
 6. **Generate SQL** — File › Export › DDL. The preview updates as you choose the target database version.
@@ -101,6 +102,8 @@ Relio does everything ERMaster does, with known problems fixed. For example:
 - DDL that used to fail on some databases is fixed and tested against old and current versions of 9 databases.
 - Test data SQL no longer breaks on single quotes or empty values.
 - Excel export uses `.xlsx` (ERMaster `.xls` templates still work).
+- Table boxes always fit their content — no empty space after deleting columns, and no cut-off text on tables stored too narrow. Connection ends always sit on the table border.
+- Only the drawing changes; sizes and positions stored in the file stay as they are, so opening and saving alone causes no diffs when you share files with ERMaster users.
 
 ## User guide
 
