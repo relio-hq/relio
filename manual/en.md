@@ -29,6 +29,7 @@ Help › Keyboard shortcuts lists them all; change them in Tools › Settings �
 | Delete | Delete |
 | Find bar / find and replace dialog | Ctrl+F / Ctrl+H |
 | Next / previous find result | Enter·F3 / Shift+Enter·Shift+F3 |
+| Change the find bar match mode (Contains → Word → Exact) | Alt+W |
 | Next / previous design check finding | F8 / Shift+F8 |
 | Merge view: next / previous conflict · current / incoming / both · apply | F8 / Shift+F8 · 1 / 2 / 3 · Ctrl+Enter |
 | Rename in place / open properties | F2 / Enter |
@@ -79,6 +80,7 @@ Help › Keyboard shortcuts lists them all; change them in Tools › Settings �
 ## Find and highlight
 
 - **Find bar** (Ctrl+F): a bar opens over the canvas. As you type, every matching table, column, relationship and note name (physical or logical) is highlighted and everything else is dimmed. Korean initial consonants also match. Turn on the bar option to search descriptions too.
+- **Match mode**: each click on the mode button on the bar (or Alt+W) switches between **Contains** (default — anywhere in the name), **Word** (a piece split at `_`, spaces, symbols or a case change must match — `ID` matches `MEMBER_ID` but not `VALID`) and **Exact** (the whole name must match). The chosen mode is remembered. Word and Exact do not use Korean initial-consonant search.
 - **Moving between results**: Enter or F3 goes to the next result and Shift+Enter or Shift+F3 to the previous one; the result flashes once. Enter pressed while composing Korean text does not move. Esc closes the bar and clears the highlight. Open the original find and replace dialog with Ctrl+H or the button on the bar.
 - **Connection highlight**: hover over a table, relationship line or column, and the connected lines and tables and the matching PK and FK columns become slightly stronger (the rest stays as it is). Click to select it, and only the connected objects stay sharp while the rest is dimmed. Selecting a category area only shows its selection border. Hovering over a table or column shows its type, NOT NULL, FK target and description in a tooltip.
 - **Settings**: in Tools › Settings › General › Highlight, turn off hover or selection highlight and dimming when finding or selecting, and choose the dim level (light, medium, strong) and the flash count and length. With **Reduce motion** on (default: follow the system setting), nothing flashes and only a thick outline is shown. Motion always ends within 3 seconds.
