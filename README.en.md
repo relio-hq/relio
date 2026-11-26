@@ -8,7 +8,7 @@
 
 **A desktop tool to keep working on your ERMaster diagrams, without Eclipse.**
 
-> Relio is in **1.0.0 beta**. Please try it and tell us what you find. See [CHANGELOG.md](CHANGELOG.md) for changes in each version (Korean).
+> **Relio 1.0.0** is out — the first stable release. From 1.0.0 on, Relio can update itself. Please try it and tell us what you find. See [CHANGELOG.md](CHANGELOG.md) for changes in each version (Korean).
 
 ---
 

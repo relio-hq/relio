@@ -32,6 +32,7 @@ Relio는 ERMaster(`.erm`) 파일을 그대로 열고 저장하는 ERD·데이터
 | 찾기 막대 일치 방식 바꾸기 (포함 → 단어 → 전체 일치) | Alt+W |
 | 다음 / 이전 설계 검사 지적 | F8 / Shift+F8 |
 | 합치기 화면: 다음 / 이전 충돌 · 내 쪽 / 바깥 쪽 / 둘 다 · 적용 | F8 / Shift+F8 · 1 / 2 / 3 · Ctrl+Enter |
+| 비교 화면: 변경 목록 묶음 전환 (테이블별 ↔ 종류별) | Ctrl+Shift+G |
 | 이름 바로 고치기 / 정보 창 열기 | F2 / Enter |
 | 도구 취소·선택 해제 | Esc |
 | 확대 / 축소 / 100% | Ctrl+= / Ctrl+- / Ctrl+0 |
@@ -55,6 +56,7 @@ Relio는 ERMaster(`.erm`) 파일을 그대로 열고 저장하는 ERD·데이터
 - **카테고리 탭**(아래): "전체"와 카테고리마다 탭. 카테고리 탭은 그 카테고리에 속한 객체만 보여 줍니다(모델 › 카테고리 › 참조하는 테이블 보기를 켜면 참조하는 테이블도 흐리게).
 - **패널 접기**: 문서 탭 줄 오른쪽 끝의 두 단추(또는 Ctrl+Alt+B · Ctrl+J, 보기 › 패널)로 오른쪽 패널(아웃라인·축소 미리보기)과 아래 패널(문제 목록)을 따로 접고 폅니다. 문서 탭을 더블클릭하면 두 패널을 한 번에 접어 캔버스를 넓게 보고, 다시 더블클릭하면 접기 전 상태로 돌아갑니다. 접은 상태는 다음에 켜도 그대로입니다.
 - **상태 표시줄**: 대상 DB와 버전(누르면 바꾸는 창), 테이블·컬럼·관계 수, 배율.
+- **Git 이력**(파일 › Git 이력, 또는 상태 표시줄의 브랜치 이름): 맨 위 **최신 커밋 카드**가 바로 앞 버전과 비교한 요약(`테이블 +1 · 컬럼 +2 ~3`)을 보여 줍니다. 카드를 누르면 직전 버전과 비교하고, 칩을 누르면 그 종류를 펼친 채 엽니다. 비교 화면의 **묶음: 테이블별 / 종류별**로 변경 목록을 바꿔 볼 수 있고, Markdown 내보내기·복사도 그 방식을 따릅니다. 저장소에는 아무것도 쓰지 않습니다.
 
 ## 그리기·편집
 
@@ -191,7 +193,7 @@ relio db import --db MySQL --database shop --user dev --output shop.erm
 - **표준 출력**: `--output -`는 글 종류(`ddl` · `dictionary` · `translation` · `dbml` · `mermaid` · `markdown` · `json`)에서 표준 출력으로 내보냅니다.
 - **`--encoding`**: UTF-8(기본) · UTF-8 BOM · UTF-16LE · UTF-16BE · EUC-KR · CP949(MS949) · Shift_JIS · GBK. 모르는 이름은 오류입니다(조용히 UTF-8로 바꾸지 않음).
 - **`relio import <형식>`**: 형식은 `auto` · `ddl` · `dbml` · `mermaid` · `markdown`, `--input`은 파일 또는 `-`(표준 입력), `--output`은 새 `.erm`(이미 있으면 `--force`가 있어야 덮어씀). `--dialect`(SQL 방언) · `--db`(새 문서 DB) · `--comment auto|description|logical` · `--name-case asis|db` · `--encoding` · `--strict`(경고가 있으면 만들지 않음). 경고는 표준 오류에 `<입력>:<줄>:<열>: 경고: <내용>` 꼴로 나옵니다.
-- **`relio diff`**: `relio diff A.erm B.erm`, `relio diff --rev REV 파일.erm`(Git 저장소의 그 버전 ↔ 디스크), `relio diff --rev REV1 --rev REV2 파일.erm`. `--format markdown|json|csv`, `--output`(`-`이면 표준 출력), `--include structure,docs,layout,settings`, `--lang`, `--exit-code`(차이가 있으면 4). 저장소에 아무것도 쓰지 않고 네트워크에 접속하지 않습니다. Git 비교 도구로 쓸 수 있습니다: `git difftool -x "relio diff" -- 모델.erm`.
+- **`relio diff`**: `relio diff A.erm B.erm`, `relio diff --rev REV 파일.erm`(Git 저장소의 그 버전 ↔ 디스크), `relio diff --rev REV1 --rev REV2 파일.erm`. `--format markdown|json|csv|sql`(sql = A 구조의 DB를 B로 바꾸는 변경 SQL — 비교 화면 내보내기 ▾ › 변경 SQL 만들기와 같음), `--group-by table|kind`(Markdown을 테이블별·종류별로 묶음, 기본 table), `--output`(`-`이면 표준 출력), `--include structure,docs,layout,settings`, `--lang`, `--exit-code`(차이가 있으면 4). 저장소에 아무것도 쓰지 않고 네트워크에 접속하지 않습니다. Git 비교 도구로 쓸 수 있습니다: `git difftool -x "relio diff" -- 모델.erm`.
 - **`relio merge`**: `relio merge 바탕.erm 내쪽.erm 바깥쪽.erm -o 결과.erm`. 결과 파일에는 충돌 표시를 넣지 않고(늘 올바른 `.erm`), 충돌이 남으면 `--on-conflict ours|theirs`(기본 ours) 쪽 값을 넣고 종료 코드 5로 끝납니다. `--keep-numbers ours|theirs`(번호를 지킬 쪽), `--report <경로|->` · `--report-format markdown|json`(충돌·자동 항목 보고서), `--label-base` · `--label-ours` · `--label-theirs`(이름표), `--no-sort`(정렬 저장 끄기), `--lang`. `-o`는 내 쪽 입력과 같은 경로여도 됩니다. 저장소에는 아무것도 쓰지 않습니다.
 - **Git merge driver**: 저장소의 `.gitattributes`에 한 줄을 넣고 Git 설정에 드라이버를 등록하면 `git merge`·`git rebase`가 `.erm`을 모델 단위로 합칩니다. 충돌이 남으면(종료 코드 5) Git은 그 파일을 충돌로 남기고, Relio에서 열어 파일 › 비교·병합 › Git 병합 충돌 풀기…로 마저 풉니다. 설치 파일은 `relio`를 PATH에 넣지 않으므로 Windows에서는 설치 폴더의 `relio.exe` 전체 경로를 `/`로 적고 따옴표로 감쌉니다(아래 첫 예). `.gitattributes`에는 `text eol=lf`도 함께 적어 커밋 안의 줄 끝을 LF로 맞춥니다 — ERMaster(CRLF)와 Relio(LF)를 섞어 쓰는 팀에서 줄 끝 차이 때문에 병합·저장마다 파일 전체가 바뀐 것으로 잡히지 않게. `--label-base %S`는 보고서의 바탕 이름표를 Git 임시 파일 이름 대신 공통 조상 이름으로 씁니다. 드라이버는 Git 설정이라 저장소에 따라가지 않으니 **ERMaster를 쓰는 팀원을 포함해 병합하는 사람 모두** 자기 PC에 등록해야 합니다(등록하지 않은 사람의 `git merge`는 줄 단위로 합쳐 충돌 표시가 남음). **주의**: 등록했지만 Git이 드라이버를 찾지 못하면(경로가 틀림 — 출력에 `relio: command not found` 같은 줄) Git은 충돌 표시 없이 **내 쪽 파일만 남긴 채** 충돌로 표시합니다. 그대로 `git add`하면 바깥 쪽 변경이 사라지니, 등록한 뒤 `git config --get merge.relio.driver`의 경로를 그대로 붙여 `"…/relio.exe" --version`이 판 번호를 내는지, `git check-attr merge -- 모델.erm`이 `merge: relio`인지 확인하세요.
 
