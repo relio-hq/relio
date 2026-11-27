@@ -8,6 +8,8 @@
 
 **ERMaster로 그리던 ERD를 Eclipse 없이, 그대로 이어서 그리는 데스크톱 도구.**
 
+**[사용 가이드 보기](https://relio-hq.github.io/relio/)**
+
 > **1.0.0 정식판**이 나왔어요. 1.0.0부터는 새 버전을 Relio 안에서 받을 수 있어요. 써 보시고 [문제 보고](#문제-알리기--아이디어)로 알려 주세요. 버전별 변경은 [CHANGELOG.md](CHANGELOG.md)에 있습니다.
 
 ---
@@ -76,6 +78,8 @@ Windows 설치 파일 **`Relio_<버전>_x64-setup.exe`** 하나로 설치해요(
 - 화면 표시에 쓰는 Microsoft Edge WebView2는 Windows 10·11에 기본으로 들어 있어요. 빠진 PC라면 설치할 때 받아 오므로 그때만 인터넷이 필요해요.
 - 회사 PC가 서명 없는 프로그램 실행을 막고 있으면 사내 관리자에게 문의하세요.
 - 지우기: Windows 설정 › 앱에서 Relio를 제거해요. 설정·연결 목록·백업(`%APPDATA%\Relio`)은 남아서 다시 설치하면 그대로 써요.
+
+처음이면 **[빠른 시작](https://relio-hq.github.io/relio/quick/start)**을 따라 해 보세요.
 
 ## 처음 시작하기
 
