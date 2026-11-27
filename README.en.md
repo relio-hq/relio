@@ -8,7 +8,7 @@
 
 **A desktop tool to keep working on your ERMaster diagrams, without Eclipse.**
 
-**[Read the user guide](https://relio-hq.github.io/relio/en/)**
+**[Relio website ↗](https://relio-hq.github.io/relio/en/)**
 
 > **Relio 1.0.0** is out — the first stable release. From 1.0.0 on, Relio can update itself. Please try it and tell us what you find. See [CHANGELOG.md](CHANGELOG.md) for changes in each version (Korean).
 
@@ -78,7 +78,7 @@ Install with a single Windows installer, **`Relio_<version>_x64-setup.exe`**. Re
 - Microsoft Edge WebView2 is built into Windows 10 and 11. If it is missing, the installer downloads it — the only time an internet connection is needed.
 - To uninstall, remove Relio in Windows Settings › Apps. Settings, connections and backups (`%APPDATA%\Relio`) are kept for a reinstall.
 
-New to Relio? Follow the **[quick start](https://relio-hq.github.io/relio/en/quick/start)**.
+New to Relio? Follow the **[quick start ↗](https://relio-hq.github.io/relio/en/quick/start)** on the website.
 
 ## Getting started
 
