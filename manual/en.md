@@ -65,7 +65,7 @@ Help › Keyboard shortcuts lists them all; change them in Tools › Settings �
 - **Categories**: drag with the category tool (C) to make an area. Objects placed inside the area belong to that category.
 - **Select and move**: click, Shift+click to add, drag on empty space to select several. Arrow keys move by 1, Shift+arrow keys by 10. Drag a connector to add bend points; Arrange › Right-angle connectors · Restore defaults.
 - **Table size**: select a table or view and drag the left or right handle to change its width. You can widen it freely, and narrow it down to the width that shows all of its content. The height always fits the columns. A table with no columns shows a faint "Double-click to add columns".
-- **Arrange menu**: align (left, center, right, top, bottom), same width or height, distribute horizontally or vertically, auto size, background color, font.
+- **Arrange menu**: align (left, center, right, top, bottom), match width or height, distribute horizontally or vertically, auto size, background color, font.
 - **Copy and paste**: objects can be pasted into another document as well. Copy selected columns to paste them into another table.
 - **Undo**: every edit can be undone with Ctrl+Z and redone with Ctrl+Y.
 - **Find and replace**: Ctrl+F opens the find bar over the canvas (see "Find and highlight" below), and Ctrl+H opens the find and replace dialog. The dialog searches names, comments, types and more, and replaces them in one go. Edit › Edit all properties edits column properties of many tables in one grid.
@@ -145,7 +145,7 @@ When the same `.erm` was changed in two places, Relio merges by model object (ta
 ## Working with databases
 
 - **Import**: File › Import › From DB — connect → choose schemas → choose objects → add to the document. When names already exist, choose skip, rename or overwrite. Logical names can be filled from translation dictionaries. The whole import is one undo step.
-- **Export to DB**: File › Export › Export to DB — the SQL to run is shown first; on databases that support it, everything runs in one transaction and is rolled back if a statement fails.
+- **Export to DB**: File › Export to DB… (also on the toolbar) — the SQL to run is shown first; on databases that support it, everything runs in one transaction and is rolled back if a statement fails.
 - **Import from another file**: File › Import › From file — pick objects from another `.erm`.
 - **Direct connection**: the drivers for PostgreSQL · MySQL · MariaDB · SQL Server · SQLite are built into the app, so nothing else needs to be installed.
 - **Oracle**: download Oracle Instant Client (Basic or Basic Light) from the Oracle website, unzip it, and register that folder (the one with `oci.dll`) as "Oracle Instant Client folder" in Tools › Settings › DB connections. If none is registered, PATH is searched.
@@ -233,13 +233,13 @@ git config merge.relio.driver "relio merge %O %A %B -o %A --label-base %S --labe
 | Automatic backups (latest 10 per file) | `%APPDATA%\Relio\backup` |
 | Database passwords | Windows Credential Manager (entries starting with `relio:`) — inside the `.erm` if turned on per file |
 
-Relio never connects to the internet on its own, and never sends usage data, error reports or file contents anywhere.
+Apart from checking for and downloading new versions (only when you turn it on or check yourself), Relio never connects to the internet on its own, and never sends usage data, error reports or file contents anywhere. The update check only downloads version information from the public releases page and sends nothing.
 
 ## Installing and uninstalling
 
 - **Install**: run the installer (`Relio_<version>_x64-setup.exe`). It installs for the current user only, without administrator rights. You choose whether to add a desktop shortcut during setup. The portable version (`Relio_<version>_x64_portable.zip`), which needs no installation, uses the same settings folder.
 - **Supported**: Windows 10 · 11 (64-bit). Microsoft Edge WebView2, which Relio uses to display its interface, is built into Windows 10 and 11.
-- **Update**: run the new installer; it installs over the old version and keeps your settings.
+- **Update**: turn on "Check for new versions automatically (once a day)" in Tools › Settings › General to be told when a new version is out, or use Help › Check for updates… at any time. When a new version is available, "Install now" downloads and installs it inside Relio and reopens it (only if the downloaded file's signature is valid). The portable version is not installed automatically; download the new zip and replace it. You can also run a new installer yourself; it installs over the old version and keeps your settings.
 - **Uninstall**: remove Relio in Windows Settings › Apps. Settings, connection list and backups (`%APPDATA%\Relio`) remain and are used again if you reinstall.
 - **Remove everything**: after uninstalling, delete the `%APPDATA%\Relio` folder and the Windows Credential Manager entries starting with `relio:` (you can also delete them first in Tools › Settings › Password).
 
@@ -265,4 +265,4 @@ Relio never connects to the internet on its own, and never sends usage data, err
 - The interface is in Korean and English. Japanese and Chinese are partial; untranslated text appears in English. You can choose light, dark, Cherry blossom, Lavender, Everforest, Catppuccin Mocha or Frost themes.
 - Git merge conflicts are resolved by model object (`relio merge` also works as a Git merge driver), and there are design checks, suggestions while typing and find bar highlights.
 - You can export to DBML, Mermaid, Markdown and model JSON, and import from SQL (`CREATE TABLE`), DBML, Mermaid and Markdown.
-- Usage data, error reports and file contents are never sent anywhere. Every feature works without the internet.
+- Usage data, error reports and file contents are never sent anywhere. Apart from checking for and downloading new versions (only when you turn it on or check yourself), every feature works without the internet.
