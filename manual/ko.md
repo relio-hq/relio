@@ -37,7 +37,7 @@ Relio는 ERMaster(`.erm`) 파일을 그대로 열고 저장하는 ERD·데이터
 | 도구 취소·선택 해제 | Esc |
 | 확대 / 축소 / 100% | Ctrl+= / Ctrl+- / Ctrl+0 |
 | 확대·축소 (마우스) | Ctrl+마우스 휠 |
-| 화면 이동 | Space를 누른 채 끌기 |
+| 화면 이동 | Space를 누른 채 끌기, 또는 손 도구(H)로 끌기 |
 | 다음 / 이전 문서 탭 | Ctrl+Tab / Ctrl+Shift+Tab |
 | 오른쪽 패널 / 아래 패널 접기·펴기 · 캔버스 최대화 | Ctrl+Alt+B / Ctrl+J · Ctrl+Shift+M |
 | 선택 · 테이블 · 뷰 · 1:N 관계 · 노트 · 카테고리 도구 | V · T · W · R · N · C |

@@ -37,7 +37,7 @@ Help › Keyboard shortcuts lists them all; change them in Tools › Settings �
 | Cancel the tool or clear the selection | Esc |
 | Zoom in / zoom out / 100% | Ctrl+= / Ctrl+- / Ctrl+0 |
 | Zoom (mouse) | Ctrl+mouse wheel |
-| Pan the view | Hold Space and drag |
+| Pan the view | Hold Space and drag, or drag with the Hand tool (H) |
 | Next / previous document tab | Ctrl+Tab / Ctrl+Shift+Tab |
 | Show or hide right panel / bottom panel · Maximize canvas | Ctrl+Alt+B / Ctrl+J · Ctrl+Shift+M |
 | Tools: select · table · view · 1:N relationship · note · category | V · T · W · R · N · C |
