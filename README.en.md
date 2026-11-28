@@ -87,7 +87,7 @@ Pick the target database and version and the DDL preview updates right away. Imp
 | ✅ | **Command line** — `relio export`, `import`, `diff`, `merge`, `lint`, `db` and `mcp`, with exit codes for builds and CI |
 | ✅ | **Workflow** — reopen the tabs you had open, move around with the hand tool, open the folder of an exported file, a target database version per file |
 | ✅ | **Safe** — undo for every edit, automatic backup and recovery, damaged files repaired as far as possible |
-| ✅ | **Comfortable** — 7 themes (light, dark, Cherry blossom, Lavender, Everforest, Catppuccin Mocha, Frost), Korean and English interface, custom shortcuts, built-in user guide |
+| ✅ | **Comfortable** — 6 themes (light, dark, Cherry blossom, Lavender, Catppuccin Mocha, Frost), Korean and English interface, custom shortcuts, built-in user guide |
 | ✅ | **Offline and free** — drawing, checking and exporting work without the internet, and Relio sends no usage data or file contents anywhere |
 
 ## Install
