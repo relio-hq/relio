@@ -10,7 +10,7 @@
 
 **[Relio website ↗](https://relio-hq.github.io/relio/en/)**
 
-> **Relio 1.0.0** is out — the first stable release. From 1.0.0 on, Relio can update itself. Please try it and tell us what you find. See [CHANGELOG.md](CHANGELOG.md) for changes in each version (Korean).
+> Get the **stable release** from [Releases](../../releases/latest). The installed version can then get newer versions from inside Relio. Please try it and tell us what you find. See [CHANGELOG.md](CHANGELOG.md) for changes in each version (Korean).
 
 ---
 
@@ -48,6 +48,28 @@ The Ctrl+F find bar matches Korean names by their initial consonants as well as 
 
 Hover over a table, relationship line or column, and the connected lines and tables and the matching primary and foreign key columns are highlighted. Nothing else changes, so the screen doesn't dim as you move the mouse. Pause for a moment to see the type, NOT NULL and the referenced column in a tooltip. Click to select and everything outside the connection is dimmed for a closer look; the dim level and reduce motion can be changed in Settings.
 
+## Work with your AI tool
+
+Ask your own AI tool (Claude Code, for example) in plain words, and it reads and changes your Relio model. The changes show up right away in the Relio window, with the changed tables highlighted. One Ctrl+Z takes them back, and the file changes only when you save.
+
+- "Find where the order tables need an index"
+- "Find columns that have no comment"
+- "Add a payment table"
+
+You usually don't have to say "Relio". Hand it a requirements document and it drafts an ERD and opens it in Relio.
+
+Register once to connect. Paste the line below in a terminal, or copy it from **Tools › Command line & AI connection** in Relio.
+
+```
+claude mcp add --scope user relio -- relio mcp
+```
+
+- To look before anything is applied, choose "Review first" in **Settings › General › AI tools**. You also pick what goes in when a change overlaps your unsaved edits.
+- The connection to Relio stays on your PC, and Relio uses no network and no sign-in for it. However, **what the AI reads (table and column names and descriptions) is sent to your AI service.** For company models, add `--anonymize` to hide names and descriptions (the AI then cannot change the model).
+- Your AI tool can also edit files directly with its own editing features, so keep a backup of important models.
+
+For other AI tools and all options, see the [user guide](manual/en.md#ai-tool-connection-mcp).
+
 ## Everything you expect, built in
 
 | | Feature |
@@ -71,7 +93,7 @@ Install with a single Windows installer, **`Relio_<version>_x64-setup.exe`**. Re
 
 1. Download the latest installer from **[Releases](../../releases/latest)** and run it. To use Relio without installing, download `Relio_<version>_x64_portable.zip`, extract it and run `relio.exe`.
 2. If Windows shows **"Windows protected your PC"** on first run, click **More info → Run anyway**. The installer is not code-signed yet, which causes this warning. Make sure you downloaded it from this repository.
-3. Choose the installer language and whether to open `.erm` files with Relio.
+3. Choose the installer language and whether to open `.erm` files with Relio. To run `relio` from a terminal or an AI tool, turn on **"Use relio from the command line"** on the last page (off by default). If you leave it off, or use the portable version, copy the full path with **"Copy command-line path"** in Help › About Relio. You can also copy the path in **Tools › Command line & AI connection**.
 
 - Supported: Windows 10 and 11 (64-bit). macOS support is planned once the feature set is stable.
 - **No administrator rights needed.** Relio installs for the current user only.

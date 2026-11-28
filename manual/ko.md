@@ -172,6 +172,8 @@ Relio는 ERMaster(`.erm`) 파일을 그대로 열고 저장하는 ERD·데이터
 
 같은 실행 파일(`relio`)로 화면 없이 내보내고, 가져오고, 비교하고, 합치고, 검사하고, DB와 주고받습니다. 빌드 스크립트나 CI에 넣기 좋습니다.
 
+명령줄에서 그냥 `relio`로 부르려면 설치 마지막 화면에서 **"명령줄에서 relio 쓰기"**를 켭니다(기본 꺼짐). 지금 사용자의 PATH에만 설치 폴더를 더하고(관리자 권한 필요 없음), 제거하면 그 항목만 뺍니다. 새로 연 터미널부터 적용됩니다. 켜지 않았거나 설치 없이 쓰는 실행판이면 도움말 › Relio 정보의 **"명령줄 경로 복사"**로 지금 쓰는 `relio.exe`의 전체 경로를 따옴표째 복사해 붙여 씁니다.
+
 ```
 relio export ddl --input model.erm --output model.sql --db-version 17
 relio export excel --input model.erm --output model.xlsx --template default_ko
@@ -195,7 +197,7 @@ relio db import --db MySQL --database shop --user dev --output shop.erm
 - **`relio import <형식>`**: 형식은 `auto` · `ddl` · `dbml` · `mermaid` · `markdown`, `--input`은 파일 또는 `-`(표준 입력), `--output`은 새 `.erm`(이미 있으면 `--force`가 있어야 덮어씀). `--dialect`(SQL 방언) · `--db`(새 문서 DB) · `--comment auto|description|logical` · `--name-case asis|db` · `--encoding` · `--strict`(경고가 있으면 만들지 않음). 경고는 표준 오류에 `<입력>:<줄>:<열>: 경고: <내용>` 꼴로 나옵니다.
 - **`relio diff`**: `relio diff A.erm B.erm`, `relio diff --rev REV 파일.erm`(Git 저장소의 그 버전 ↔ 디스크), `relio diff --rev REV1 --rev REV2 파일.erm`. `--format markdown|json|csv|sql`(sql = A 구조의 DB를 B로 바꾸는 변경 SQL — 비교 화면 내보내기 ▾ › 변경 SQL 만들기와 같음), `--group-by table|kind`(Markdown을 테이블별·종류별로 묶음, 기본 table), `--output`(`-`이면 표준 출력), `--include structure,docs,layout,settings`, `--lang`, `--exit-code`(차이가 있으면 4). 저장소에 아무것도 쓰지 않고 네트워크에 접속하지 않습니다. Git 비교 도구로 쓸 수 있습니다: `git difftool -x "relio diff" -- 모델.erm`.
 - **`relio merge`**: `relio merge 바탕.erm 내쪽.erm 바깥쪽.erm -o 결과.erm`. 결과 파일에는 충돌 표시를 넣지 않고(늘 올바른 `.erm`), 충돌이 남으면 `--on-conflict ours|theirs`(기본 ours) 쪽 값을 넣고 종료 코드 5로 끝납니다. `--keep-numbers ours|theirs`(번호를 지킬 쪽), `--report <경로|->` · `--report-format markdown|json`(충돌·자동 항목 보고서), `--label-base` · `--label-ours` · `--label-theirs`(이름표), `--no-sort`(정렬 저장 끄기), `--lang`. `-o`는 내 쪽 입력과 같은 경로여도 됩니다. 저장소에는 아무것도 쓰지 않습니다.
-- **Git merge driver**: 저장소의 `.gitattributes`에 한 줄을 넣고 Git 설정에 드라이버를 등록하면 `git merge`·`git rebase`가 `.erm`을 모델 단위로 합칩니다. 충돌이 남으면(종료 코드 5) Git은 그 파일을 충돌로 남기고, Relio에서 열어 파일 › 비교·병합 › Git 병합 충돌 풀기…로 마저 풉니다. 설치 파일은 `relio`를 PATH에 넣지 않으므로 Windows에서는 설치 폴더의 `relio.exe` 전체 경로를 `/`로 적고 따옴표로 감쌉니다(아래 첫 예). `.gitattributes`에는 `text eol=lf`도 함께 적어 커밋 안의 줄 끝을 LF로 맞춥니다 — ERMaster(CRLF)와 Relio(LF)를 섞어 쓰는 팀에서 줄 끝 차이 때문에 병합·저장마다 파일 전체가 바뀐 것으로 잡히지 않게. `--label-base %S`는 보고서의 바탕 이름표를 Git 임시 파일 이름 대신 공통 조상 이름으로 씁니다. 드라이버는 Git 설정이라 저장소에 따라가지 않으니 **ERMaster를 쓰는 팀원을 포함해 병합하는 사람 모두** 자기 PC에 등록해야 합니다(등록하지 않은 사람의 `git merge`는 줄 단위로 합쳐 충돌 표시가 남음). **주의**: 등록했지만 Git이 드라이버를 찾지 못하면(경로가 틀림 — 출력에 `relio: command not found` 같은 줄) Git은 충돌 표시 없이 **내 쪽 파일만 남긴 채** 충돌로 표시합니다. 그대로 `git add`하면 바깥 쪽 변경이 사라지니, 등록한 뒤 `git config --get merge.relio.driver`의 경로를 그대로 붙여 `"…/relio.exe" --version`이 판 번호를 내는지, `git check-attr merge -- 모델.erm`이 `merge: relio`인지 확인하세요.
+- **Git merge driver**: 저장소의 `.gitattributes`에 한 줄을 넣고 Git 설정에 드라이버를 등록하면 `git merge`·`git rebase`가 `.erm`을 모델 단위로 합칩니다. 충돌이 남으면(종료 코드 5) Git은 그 파일을 충돌로 남기고, Relio에서 열어 파일 › 비교·병합 › Git 병합 충돌 풀기…로 마저 풉니다. 설치할 때 "명령줄에서 relio 쓰기"를 켜지 않았으면 `relio`가 PATH에 없으므로, Windows에서는 `relio.exe` 전체 경로를 `/`로 적고 따옴표로 감쌉니다(아래 첫 예 — 도움말 › Relio 정보의 "명령줄 경로 복사"로 따옴표째 복사한 뒤 `\`를 `/`로 바꿉니다). `.gitattributes`에는 `text eol=lf`도 함께 적어 커밋 안의 줄 끝을 LF로 맞춥니다 — ERMaster(CRLF)와 Relio(LF)를 섞어 쓰는 팀에서 줄 끝 차이 때문에 병합·저장마다 파일 전체가 바뀐 것으로 잡히지 않게. `--label-base %S`는 보고서의 바탕 이름표를 Git 임시 파일 이름 대신 공통 조상 이름으로 씁니다. 드라이버는 Git 설정이라 저장소에 따라가지 않으니 **ERMaster를 쓰는 팀원을 포함해 병합하는 사람 모두** 자기 PC에 등록해야 합니다(등록하지 않은 사람의 `git merge`는 줄 단위로 합쳐 충돌 표시가 남음). **주의**: 등록했지만 Git이 드라이버를 찾지 못하면(경로가 틀림 — 출력에 `relio: command not found` 같은 줄) Git은 충돌 표시 없이 **내 쪽 파일만 남긴 채** 충돌로 표시합니다. 그대로 `git add`하면 바깥 쪽 변경이 사라지니, 등록한 뒤 `git config --get merge.relio.driver`의 경로를 그대로 붙여 `"…/relio.exe" --version`이 판 번호를 내는지, `git check-attr merge -- 모델.erm`이 `merge: relio`인지 확인하세요.
 
 ```
 # .gitattributes
@@ -212,7 +214,7 @@ git config merge.relio.driver "relio merge %O %A %B -o %A --label-base %S --labe
 
 - **`relio lint`**: `relio lint 모델.erm`. `--format text|markdown|json`, `--output`(기본 `-` 표준 출력), `--fail-on error|warning|info|none`(이 심각도 이상 지적이 있으면 종료 코드 6, 기본 warning), `--disable`·`--only`(쉼표로 구분한 규칙 ID — 예: `pk-missing`, `fk-no-index`, `reserved-word`), `--db-version`, `--lang`. 앱에서 예외로 한 것은 적용되지 않으므로(어느 PC에서나 같은 결과) 규칙은 `--disable`로 끕니다. `relio export ddl`도 DDL 실행을 실패하게 하는 오류가 있으면 표준 오류에 한 줄 알립니다.
 - **`relio db`**: `test`(접속 시험) · `export`(DB로 내보내기) · `import`(DB에서 가져오기) · `roundtrip`(왕복 시험). 암호는 `--password-env <환경 변수>`로 넘깁니다.
-- `relio --help`, `relio export <종류> --help`, `relio import --help`, `relio diff --help`, `relio merge --help`, `relio lint --help`, `relio db <명령> --help`로 옵션을 봅니다. 출력 언어는 앱 언어를 따르고, `RELIO_LANG`(ko · en · ja · zh)로 바꿀 수 있습니다.
+- `relio --help`, `relio export <종류> --help`, `relio import --help`, `relio diff --help`, `relio merge --help`, `relio lint --help`, `relio db <명령> --help`, `relio mcp --help`로 옵션을 봅니다. 출력 언어는 앱 언어를 따르고, `RELIO_LANG`(ko · en · ja · zh)로 바꿀 수 있습니다.
 
 | 종료 코드 | 뜻 |
 |---|---|
@@ -224,7 +226,51 @@ git config merge.relio.driver "relio merge %O %A %B -o %A --label-base %S --labe
 | 5 | 병합 충돌이 남음(`merge`) |
 | 6 | `--fail-on` 단계 이상 지적이 있음(`lint`) |
 
-## 내 정보는 어디에 저장되나요
+## AI 도구 연결 (MCP)
+
+Claude Code · Claude Desktop · Cursor 같은 **내 AI 도구**가 Relio 모델을 읽고, 요구사항 문서로 새 초안을 만들고, 열린 모델을 고칩니다. AI가 고친 것은 **Relio 창에 바로 반영**되고(저장 전), 파일은 내가 저장할 때만 바뀝니다. Relio 자체에는 AI가 없고, 네트워크 접속 · 로그인 · Relio 서버가 없습니다.
+
+**처음 쓰는 순서**
+
+1. **등록 (처음 한 번)**: AI 도구를 켜기 전에 터미널에서 아래 등록 줄을 붙여 넣습니다. `--scope user`로 등록하면 어느 폴더에서 AI 도구를 켜도 쓸 수 있고, `claude mcp list`에 `relio`가 보이면 된 것입니다. `relio`가 PATH에 없으면(설치 때 "명령줄에서 relio 쓰기"를 켜지 않았거나 실행판) `relio` 자리에 도움말 › Relio 정보의 **"명령줄 경로 복사"**로 얻은 전체 경로를 따옴표째 넣습니다(`relio mcp --help`도 PATH에 없을 때 그 실행 파일의 등록 줄을 보여 줍니다).
+2. **AI 도구를 새로 켭니다**: 등록은 새로 켠 AI 도구부터 보입니다(Claude Code는 모델이 있는 폴더에서 `claude`). 설치 뒤 "명령줄에서 relio 쓰기"를 켰다면, 그때 이미 켜져 있던 터미널 · Claude Desktop · Cursor도 다시 켜야 `relio`를 찾습니다.
+3. **AI 도구 안에서 첫 요청**: 예를 들어 "Relio로 shop.erm의 테이블 구성을 설명해 줘", "이 폴더의 요구사항 문서를 읽고 ERD 초안을 만들어 Relio에 열어 줘", "선택한 테이블에 감사 컬럼을 추가해 줘". Relio를 말하지 않아도 대개 `.erm` · 테이블 · 컬럼 · 인덱스 요청이면 AI 도구가 Relio 도구를 씁니다. Claude Code에서는 추천 질문이 `/mcp__relio__explain_model` 같은 슬래시 명령으로도 보입니다.
+
+```
+# Claude Code (터미널에서 — AI 도구를 띄우는 폴더가 AI가 볼 수 있는 폴더)
+claude mcp add --scope user relio -- relio mcp
+claude mcp add --scope user relio -- "C:\Users\<사용자>\AppData\Local\Relio\relio.exe" mcp --root "C:\work\models" --anonymize
+claude mcp list
+
+# Claude Desktop (claude_desktop_config.json) · Cursor (.cursor/mcp.json) — 같은 꼴, --root 필수
+{ "mcpServers": { "relio": { "command": "C:\\Users\\<사용자>\\AppData\\Local\\Relio\\relio.exe", "args": ["mcp", "--root", "C:\\work\\models"] } } }
+```
+
+- **Claude Desktop · Cursor**: 이 앱들은 내 모델 폴더가 아닌 곳에서 `relio mcp`를 띄우므로 **`--root`로 모델 폴더를 꼭 적습니다**. JSON 안에서는 `\`를 `\\`로 두 번 씁니다. "명령줄 경로 복사"는 따옴표째 복사하므로, JSON에는 바깥 따옴표를 빼고 `\`를 `\\`로 바꿔 넣습니다.
+- **옵션**: `--root <폴더>`(AI가 볼 수 있는 폴더, 여러 번 가능 — 없으면 AI 도구가 띄운 지금 폴더), `--anonymize`(테이블 · 컬럼 등의 이름은 `T1` · `C1` 같은 번호로 바꾸고 설명 · 노트 · 기본값은 비운 모델로만 답함 — 형식 · 길이 · 키 · 관계 구조와 파일 이름은 그대로 전달되고, 쓰기 도구는 빠짐), `--read-only`(쓰기 도구 `create_draft` · `propose_change`를 뺌 — 읽은 내용은 그대로 전송됨). `relio mcp --help`로 등록 예를 봅니다.
+- **연결 범위**: 범위는 **어느 폴더에서 AI 도구를 켤 때 Relio가 연결되는지**입니다. Relio가 볼 수 있는 파일(아래 "AI가 볼 수 있는 파일")과는 별개입니다. 도구 › **명령줄·AI 연결…** 창에서 골라 그 줄을 복사할 수 있습니다.
+
+  | 범위 | 뜻 | 등록 줄 |
+  |---|---|---|
+  | 모든 폴더에서 `user` (기본) | 어느 폴더에서 AI 도구를 켜도 연결됩니다. | `claude mcp add --scope user relio -- relio mcp` |
+  | 이 프로젝트 폴더에서만 `local` | 그 폴더의 터미널에서 붙여 넣습니다. | `claude mcp add --scope local relio -- relio mcp` |
+  | 팀과 함께 `project` | 그 폴더에 `.mcp.json`이 생기고, 커밋하면 팀원도 연결됩니다. 팀원도 각자 Relio를 설치하고 명령줄(relio)을 켜야 하며, Claude Code가 처음 쓸 때 허락을 묻습니다. 팀원마다 설치 경로가 달라 늘 `relio mcp` 꼴입니다. | `claude mcp add --scope project relio -- relio mcp` |
+
+- **등록 지우기**: 고른 범위에 맞춰 `claude mcp remove relio --scope user`(`local` · `project`는 그 폴더에서 `--scope local` · `--scope project`). `claude mcp list`로 확인합니다. 지워도 Relio 앱 · 파일은 그대로입니다.
+- **AI가 볼 수 있는 파일**: ① **Relio에 열려 있는 `.erm` 파일** — AI 도구를 어느 폴더에서 켜도 읽고 변경안을 낼 수 있습니다. 그 파일 하나만 허락되고, 같은 폴더의 다른 파일과 그 옆 새 파일 쓰기는 허락되지 않습니다. 창에서 닫으면 다시 쓸 수 없습니다. ② AI 도구를 켠 폴더(그 아래 `.erm`) ③ `--root`로 더한 폴더. `list_models`는 파일마다 출처(Relio에 열림 · 폴더)를 함께 보입니다.
+- **허락하지 않는 폴더**: 드라이브 맨 위(`C:\`), 사용자 홈 맨 위와 그 위(`C:\Users`), Windows 폴더, Program Files · Program Files (x86) · ProgramData와 그 안, 네트워크 폴더(UNC · 네트워크 드라이브). 이런 폴더를 `--root`로 주거나 그 폴더에서 AI 도구를 띄우면 그 폴더는 허락하지 않습니다. **홈 폴더에서 AI 도구를 켜면 연결은 되고, Relio에 열린 파일만 보입니다** — 폴더 전체를 쓰려면 `.erm`이 있는 프로젝트 폴더에서 다시 켜거나 `--root <폴더>`로 등록하세요.
+- **읽기 도구**: `list_models`(허락한 폴더의 `.erm`과 Relio에 열린 파일 목록) · `model_summary`(DB · 개수 · 카테고리 · 테이블 목록 · 설계 검사 지적 수) · `list_tables`(테이블 · 뷰 목록) · `get_table`(컬럼 · 인덱스 · 관계 전체) · `find`(이름 · 설명 찾기, 초성 포함) · `related`(관계로 이어진 테이블, 깊이 3까지) · `lint`(설계 검사) · `export_ddl`(DDL 글) · `diff`(다른 파일 · Git 버전과 비교) · `get_selection`(Relio 창에서 지금 선택한 테이블 — "선택한 것"이라고 말하면 됨).
+- **창과 쓰기 도구**: `open_in_relio`(Relio 창에서 열고 테이블을 강조) · `create_draft`(DBML · Mermaid · SQL로 **새** `.erm` 초안을 만들고 Relio에 엶 — 이미 있는 파일은 덮어쓰지 않음, 첫 줄이 `// Relio DBML v1`인 DBML이면 논리명 · 설명까지 실림) · `propose_change`(열린 모델 고치기). 추천 질문(프롬프트): `explain_model` · `review_ddl` · `change_impact` · `draft_from_requirements`(요구사항 문서로 초안). AI 도구가 지금 쓰는 폴더 밖에는 새 파일을 만들지 않습니다 — 홈 폴더에서 켰다면 어느 프로젝트 폴더에 만들지 묻습니다.
+- **AI 변경은 바로 반영**: `propose_change`의 변경은 Relio 창의 열린 문서에 **바로 들어갑니다**(대상이 안 열려 있으면 열고, Relio가 꺼져 있으면 켬). 되돌리기 한 번으로 돌아가고, 바뀐 테이블이 잠깐 강조되며 "AI가 ORDERS 외 2개를 바꿨습니다 [되돌리기] [바뀐 곳 보기]" 알림이 뜹니다. 문서는 '저장 안 됨' 상태라 **파일은 내가 저장할 때만** 바뀝니다. 창에 저장하지 않은 수정이 있어 AI 변경과 겹치면 그 변경은 합치기 탭 "합치기: <파일> — AI 변경안"으로 열려 골라 [적용]합니다(셀 편집 · 끌기 · 대화 창 중에는 끝날 때까지 기다리고, 10초 넘게 이어지면 합치기 탭으로). 환경 설정 › 일반 › AI 도구에서 "먼저 검토"을 고르면 늘 합치기 탭으로 엽니다. AI에게는 "반영됨(저장 전)" · "검토 필요" 같은 결과만 돌아갑니다. 변경안 사본은 설정 폴더(`%APPDATA%\Relio\mcp\proposals`)에 두고 7일 뒤 지웁니다.
+- **AI 도구 자체의 편집**: AI 도구는 Relio와 상관없이 자기 파일 편집 기능으로 `.erm`을 직접 고칠 수 있습니다. 모델 폴더는 Git으로 관리하거나 백업을 두세요.
+- **켜진 창 반영**: AI 도구가 연결되어 있으면 상태 표시줄 오른쪽에 **"AI 연결됨"**이 보이고, 처음 연결된 때 한 번 안내 창이 뜹니다(새 소식 창이 떠 있으면 그 창을 닫은 뒤). AI 도구가 끝나면(비정상 종료 포함) 표시도 곧 사라집니다. AI 연결 중에 열린 파일이 바깥에서 바뀌고 저장하지 않은 수정이 없으면 — AI 도구가 아닌 다른 프로그램의 변경도 포함해서 — 묻지 않고 다시 읽어, 바뀐 테이블을 3초 강조하고 상태 표시줄에 "AI 변경 반영: ORDERS 외 2" 같은 한 줄을 띄웁니다(누르면 그 테이블로). 저장하지 않은 수정이 있으면 지금처럼 [합치기…]를 묻습니다.
+- **AI 도구에서 열기**: 도구 메뉴 맨 위(문서 탭 오른쪽 클릭 메뉴에도 있음)의 **"AI 도구에서 열기…"**는 그 `.erm`이 있는 폴더에서 터미널(Windows Terminal, 없으면 PowerShell)을 열기만 하고(어떤 명령도 대신 실행하지 않음), 순서대로 ① 터미널에 붙여 넣을 등록 줄(처음 한 번 — 미리 클립보드에 들어 있음) ② AI 도구 켜기(`claude`) ③ AI 도구 안에서 할 첫 요청을 [복사] 단추와 함께 보여 줍니다. 터미널을 열지 못하면 그 폴더 경로를 보여 주니 직접 터미널을 여세요. 등록 줄은 명령줄·AI 연결 창에서 고른 범위를 따릅니다.
+- **명령줄·AI 연결 창**: 도구 › **명령줄·AI 연결…**에서 지금 연결 상태, 연결 범위와 등록 · 지우기 한 줄, 명령줄 경로 복사, "명령줄에서 relio 쓰기" 상태를 한곳에서 봅니다. 꺼짐이면 설치 파일을 다시 실행해 마침 페이지의 세 번째 칸 "명령줄에서 relio 쓰기"를 켜세요. 실행판(zip)은 그 폴더를 PATH에 직접 더하세요.
+- **안전**: AI가 읽은 모델 내용(테이블 · 컬럼 이름과 설명)은 **내 AI 서비스로 전송**됩니다. 회사 모델이면 `--anonymize`로 이름과 설명을 감추고 `--root`로 폴더를 좁히세요(`--read-only`는 쓰기만 막고 전송은 막지 않습니다). Relio가 쓰는 곳은 새 초안 파일과 설정 폴더의 `mcp\`뿐입니다.
+- **파일 · 위치 넘겨주기**: 도구 메뉴의 **"현재 파일 경로 복사"**(문서 탭 오른쪽 클릭의 "경로 복사"도 같음), 테이블 오른쪽 클릭의 **"AI용 위치 복사"**(`"C:\…\shop.erm"의 ORDERS 테이블`)로 복사해 AI 도구에 붙여 넣으면 됩니다. 모델이 여럿인데 어느 파일인지 말하지 않으면 AI가 먼저 묻습니다.
+- **한계**: AI는 저장된 파일을 읽습니다(창에서 아직 저장하지 않은 내용은 보지 못함 — 그래서 겹치면 합치기 탭으로). 이름 바꾸기 도구는 없어서 AI가 테이블 · 컬럼 이름을 바꾸면 지우기 + 추가로 반영될 수 있습니다.
+
+## 데이터 저장 위치
 
 | 무엇 | 위치 |
 |---|---|
@@ -237,7 +283,7 @@ Relio는 새 버전 확인과 내려받기(켰을 때나 직접 확인할 때만
 
 ## 설치 · 지우기
 
-- **설치**: 설치 파일(`Relio_<버전>_x64-setup.exe`)을 실행합니다. 관리자 권한 없이 지금 사용자 계정에만 설치됩니다. 바탕화면 바로가기는 설치 중에 고릅니다. 설치 없이 쓰는 실행판(`Relio_<버전>_x64_portable.zip`)도 같은 설정 폴더를 씁니다.
+- **설치**: 설치 파일(`Relio_<버전>_x64-setup.exe`)을 실행합니다. 관리자 권한 없이 지금 사용자 계정에만 설치됩니다. 바탕화면 바로가기와 "명령줄에서 relio 쓰기"(사용자 PATH에 설치 폴더 추가, 기본 꺼짐)는 설치 마지막 화면에서 고르고, 다시 설치하거나 업데이트할 때 그 선택을 따릅니다. 설치 없이 쓰는 실행판(`Relio_<버전>_x64_portable.zip`)도 같은 설정 폴더를 씁니다.
 - **지원**: Windows 10 · 11(64비트). 화면에 쓰는 Microsoft Edge WebView2는 Windows 10 · 11에 기본으로 들어 있습니다.
 - **업데이트**: 도구 › 환경 설정 › 일반의 "새 버전 자동 확인 (하루 한 번)"을 켜면 새 버전이 나왔을 때 알려 주고, 도움말 › 업데이트 확인…으로 언제든 직접 확인합니다. 새 버전이 있으면 "지금 설치"로 Relio 안에서 받아 설치하고 다시 엽니다(받은 파일의 서명이 맞을 때만). 설치 없이 쓰는 실행판은 새 zip을 받아 바꿔 씁니다. 새 설치 파일을 직접 받아 실행해도 덮어 설치되고 설정은 남습니다.
 - **지우기**: Windows 설정 › 앱에서 Relio를 제거합니다. 설정 · 연결 목록 · 백업(`%APPDATA%\Relio`)은 남아서 다시 설치하면 그대로 씁니다.
