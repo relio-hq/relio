@@ -2,55 +2,24 @@
 
 # Relio
 
-> Modern ERD & database modeling tool — opens and saves ERMaster `.erm` files, no Eclipse required
-
 [한국어](README.md) · **English**
 
-**A desktop tool to keep working on your ERMaster diagrams, without Eclipse.**
+**A modern, lightweight ERD modeling tool.**
+Open ERMaster `.erm` files as they are, catch design problems as you draw, and generate DDL for 12 databases — no Eclipse needed. Ask your own AI tool for a change and see it right in the window.
 
-**[Relio website ↗](https://relio-hq.github.io/relio/en/)**
+**[Download](../../releases/latest)** · **[Relio website ↗](https://relio-hq.github.io/relio/en/)** · [Quick start ↗](https://relio-hq.github.io/relio/en/quick/start) · [User guide](manual/en.md)
 
-> Get the **stable release** from [Releases](../../releases/latest). The installed version can then get newer versions from inside Relio. Please try it and tell us what you find. See [CHANGELOG.md](CHANGELOG.md) for changes in each version (Korean).
+<p align="center"><img src="assets/screens/demo-edit.gif" width="860" alt="Drawing tables, naming them, connecting a relationship that adds a foreign key column, then opening the DDL preview"></p>
 
----
+<p align="center"><sub>Draw a table → rename in place → connect a relationship (foreign key added) → DDL preview (the animations show the Korean interface)</sub></p>
 
-## What makes Relio different
-
-<sub>The animations show the Korean interface in the light theme; every feature is also available in English. The "online bookstore" model is a made-up example.</sub>
-
-### 1. Two people edit the same file — Relio merges by model object
-
-<p align="center"><img src="assets/screens/merge.gif" width="860" alt="A file changed outside Relio while open is merged with Merge…, choosing only the one field that overlaps, then applied"></p>
-
-Git merge conflicts and files changed outside Relio are merged by table, column and field, not by line. Tables added on both sides come in without conflicts, and you only choose where the same field was changed differently. The result is always a valid `.erm`, and a single undo reverts it. Register `relio merge` as a Git merge driver and `git merge` merges models the same way. Even in a model with 1,000 tables, the result is rebuilt within 0.05 seconds after each choice.
-
-### 2. Design checks point out problems while you draw
-
-<p align="center"><img src="assets/screens/check.gif" width="860" alt="A table named with a reserved word gets an error mark and a count in the status bar, then a collapsed info group in the problem list is expanded and a missing foreign key index is created with its Fix button"></p>
-
-15 rules — no primary key, foreign key without an index, reserved words, empty physical names or types, duplicate table names and more — run after every edit. Errors and warnings get a mark on the canvas and a count in the status bar. Info findings such as a foreign key without an index stay out of the way, collapsed to one line per rule in the problem list. Fix any finding there with one button, or ignore it. Nothing is blocked, and ignores are recorded on this PC, not in the `.erm`. Run the same checks in CI with `relio lint`.
-
-### 3. Type a column name and get the columns you already use
-
-<p align="center"><img src="assets/screens/suggest.gif" width="860" alt="Typing PUB in the column dialog lists PUBLISHED_ON and PUBLISHER_ID above the field; accepting one with Down and Enter fills the name and type at once"></p>
-
-Up to 8 suggestions come from the word dictionary and the columns of other tables, shown above the field so they never cover what you type. Pick one with the Down arrow and press Enter to fill the physical name, logical name, type and length at once, so the same column keeps the same type across tables.
-
-### 4. Find by Korean initial consonants and highlight every result
-
-<p align="center"><img src="assets/screens/find.gif" width="860" alt="Typing initial consonants in the find bar highlights every order table and dims the rest; Enter moves between results"></p>
-
-The Ctrl+F find bar matches Korean names by their initial consonants as well as by full names. Every matching table, column, relationship and note is highlighted and the rest is dimmed, so you can see where things are even in a large model. Enter and F3 move between results.
-
-### 5. Hover to highlight what is connected
-
-<p align="center"><img src="assets/screens/hover.gif" width="860" alt="Hovering over a table and a foreign key column highlights the connected lines, tables and referenced column, with a tooltip"></p>
-
-Hover over a table, relationship line or column, and the connected lines and tables and the matching primary and foreign key columns are highlighted. Nothing else changes, so the screen doesn't dim as you move the mouse. Pause for a moment to see the type, NOT NULL and the referenced column in a tooltip. Click to select and everything outside the connection is dimmed for a closer look; the dim level and reduce motion can be changed in Settings.
+> Please try it and [tell us what you find](#report-a-problem--suggest-an-idea). See [CHANGELOG.md](CHANGELOG.md) for changes in each version (Korean). The installed version gets newer versions from inside Relio.
 
 ## Work with your AI tool
 
 Ask your own AI tool (Claude Code, for example) in plain words, and it reads and changes your Relio model. The changes show up right away in the Relio window, with the changed tables highlighted. One Ctrl+Z takes them back, and the file changes only when you save.
+
+<p align="center"><img src="assets/screens/ai-en.png" width="860" alt="A table the AI changed, applied right away in the open window, with an Undo / Show changes notice"></p>
 
 - "Find where the order tables need an index"
 - "Find columns that have no comment"
@@ -70,22 +39,56 @@ claude mcp add --scope user relio -- relio mcp
 
 For other AI tools and all options, see the [user guide](manual/en.md#ai-tool-connection-mcp).
 
+## Your ERMaster files, as they are
+
+Open `.erm` files without Eclipse and save them in the same format. Teammates still on ERMaster can keep working on the same files, and opening and saving alone causes no diffs.
+
+## Catches problems while you draw
+
+<p align="center"><img src="assets/screens/check.gif" width="860" alt="A table named with a reserved word gets an error mark and a count in the status bar, then a collapsed info group in the problem list is expanded and a missing foreign key index is created with its Fix button"></p>
+
+No primary key, a foreign key without an index, reserved words and more are checked after every edit. Fix a finding with one button in the problem list, or ignore it. Nothing is blocked, and ignores are recorded on this PC, not in the `.erm`.
+
+## 12 databases, version-aware
+
+<p align="center"><img src="assets/screens/ddl-preview.png" width="860" alt="The DDL export dialog with a PostgreSQL 17 preview"></p>
+
+Pick the target database and version and the DDL preview updates right away. Import a model from a database, export to it, and generate change SQL (ALTER) from the difference between two models.
+
+<details>
+<summary><b>More that makes drawing easier</b> — column suggestions, find, connection highlighting</summary>
+
+**Type a column name and get the columns you already use.** Accepting one fills the name, type and length at once.
+
+<p align="center"><img src="assets/screens/suggest.gif" width="860" alt="Typing PUB in the column dialog lists PUBLISHED_ON and PUBLISHER_ID above the field; accepting one with Down and Enter fills the name and type at once"></p>
+
+**Ctrl+F highlights every match, and finds Korean names by their initial consonants.**
+
+<p align="center"><img src="assets/screens/find.gif" width="860" alt="Typing initial consonants in the find bar highlights every order table and dims the rest; Enter moves between results"></p>
+
+**Hover to highlight only the connected lines, tables and columns.**
+
+<p align="center"><img src="assets/screens/hover.gif" width="860" alt="Hovering over a table and a foreign key column highlights the connected lines, tables and referenced column, with a tooltip"></p>
+
+</details>
+
+<sub>The "online bookstore" model is a made-up example.</sub>
+
 ## Everything you expect, built in
 
 | | Feature |
 |---|---|
-| ✅ | **ERMaster `.erm` as is** — files saved by Relio open in ERMaster too, so mixed teams keep working together |
-| ✅ | **ER diagrams** — tables, views, relationships (1:N, N:M, self-referencing), notes, categories, word dictionary, column groups |
+| ✅ | **ER diagrams** — tables, views, relationships (1:N, N:M, self-referencing), notes, categories (view several together), word dictionary, column groups |
 | ✅ | **DDL for 12 databases** — PostgreSQL, MySQL, MariaDB, Oracle, SQL Server, Db2, H2, HSQLDB, SQLite, Informix, MS Access, standard SQL, with version-specific syntax |
 | ✅ | **Live databases** — import from and export to a database (drivers built in for PostgreSQL, MySQL, MariaDB, SQL Server and SQLite) |
 | ✅ | **Documents** — Excel table definitions (ERMaster templates work too), HTML, images, Markdown, Java, test data |
 | ✅ | **Other formats** — import SQL (`pg_dump`, `mysqldump`), DBML, Mermaid and Markdown; export DBML, Mermaid and JSON |
-| ✅ | **Git friendly** — sorted saving for small diffs, model comparison, commit history, merging by model object |
-| ✅ | **Command line** — `relio export`, `import`, `diff`, `merge`, `lint` and `db`, with exit codes for builds and CI |
-| ✅ | **Workflow** — reopen the tabs you had open, collapse panels for a bigger canvas (double-click a document tab), open the folder of an exported file, a target database version per file |
+| ✅ | **Compare and merge** — compare two models, change SQL (ALTER; PostgreSQL, MySQL, MariaDB, SQL Server, Oracle), merge by table and column, view Git history |
+| ✅ | **Command line** — `relio export`, `import`, `diff`, `merge`, `lint`, `db` and `mcp`, with exit codes for builds and CI |
+| ✅ | **Workflow** — reopen the tabs you had open, move around with the hand tool, open the folder of an exported file, a target database version per file |
 | ✅ | **Safe** — undo for every edit, automatic backup and recovery, damaged files repaired as far as possible |
-| ✅ | **Comfortable** — light and dark themes plus Cherry blossom, Lavender, Everforest, Catppuccin Mocha and Frost, Korean and English interface, custom shortcuts, built-in user guide |
-| ✅ | **Offline and free** — every feature works without the internet, and no usage data or file contents are sent anywhere |
+| ✅ | **Comfortable** — 7 themes (light, dark, Cherry blossom, Lavender, Everforest, Catppuccin Mocha, Frost), Korean and English interface, custom shortcuts, built-in user guide |
+| ✅ | **Offline and free** — drawing, checking and exporting work without the internet, and Relio sends no usage data or file contents anywhere |
 
 ## Install
 
@@ -93,33 +96,21 @@ Install with a single Windows installer, **`Relio_<version>_x64-setup.exe`**. Re
 
 1. Download the latest installer from **[Releases](../../releases/latest)** and run it. To use Relio without installing, download `Relio_<version>_x64_portable.zip`, extract it and run `relio.exe`.
 2. If Windows shows **"Windows protected your PC"** on first run, click **More info → Run anyway**. The installer is not code-signed yet, which causes this warning. Make sure you downloaded it from this repository.
-3. Choose the installer language and whether to open `.erm` files with Relio. To run `relio` from a terminal or an AI tool, turn on **"Use relio from the command line"** on the last page (off by default). If you leave it off, or use the portable version, copy the full path with **"Copy command-line path"** in Help › About Relio. You can also copy the path in **Tools › Command line & AI connection**.
+3. Choose the installer language and whether to open `.erm` files with Relio.
 
-- Supported: Windows 10 and 11 (64-bit). macOS support is planned once the feature set is stable.
+- Supported: Windows 10 and 11 (64-bit).
 - **No administrator rights needed.** Relio installs for the current user only.
+- To run `relio` from a terminal or an AI tool, turn on **"Use relio from the command line"** on the last page of the installer (off by default). If you leave it off, or use the portable version, copy the full path from **Tools › Command line & AI connection** or Help › About Relio.
 - Microsoft Edge WebView2 is built into Windows 10 and 11. If it is missing, the installer downloads it — the only time an internet connection is needed.
 - To uninstall, remove Relio in Windows Settings › Apps. Settings, connections and backups (`%APPDATA%\Relio`) are kept for a reinstall.
 
-New to Relio? Follow the **[quick start ↗](https://relio-hq.github.io/relio/en/quick/start)** on the website.
-
 ## Getting started
 
-1. **Try a sample** — Choose "Open sample" on the start screen: a PostgreSQL sample (online bookstore) or a MySQL sample (membership and permissions). They cover relationships, indexes, views and test data, so they are good for exploring. Download: [PostgreSQL](assets/samples/bookstore-postgresql.erm) · [MySQL](assets/samples/membership-mysql.erm)
-2. **Open a file** — "Open file" on the start screen (Ctrl+O), or drag an `.erm` file onto the window. Multiple files open in tabs.
-3. **Create a model** — "New diagram" (Ctrl+N), then choose a database and its target version (if unsure, leave the version as is). You pick the location the first time you save.
-4. **Draw a table** — Pick the table tool on the left and click the canvas. Double-click a table (or press Enter) to add columns.
-5. **Connect a relationship** — Drag from the parent table to the child table with the relationship tool. The foreign key column is added automatically.
-6. **Generate SQL** — File › Export › DDL. The preview updates as you choose the target database version.
+New to Relio? Follow the **[quick start ↗](https://relio-hq.github.io/relio/en/quick/start)** on the website.
 
-For shortcuts and everything else (including merging, design checks and the command line), see the user guide below.
-
-## More screenshots
-
-<p align="center"><img src="assets/screens/demo-edit.gif" width="860" alt="Drawing tables, naming them, connecting a relationship that adds a foreign key column, then opening the DDL preview"></p>
-
-<p align="center"><sub>Draw a table → rename in place → connect a relationship (foreign key added) → DDL preview</sub></p>
-
-<sub>Screenshots show the Korean UI.</sub>
+- **Try a sample** — "Open sample" on the start screen. Download: [PostgreSQL](assets/samples/bookstore-postgresql.erm) · [MySQL](assets/samples/membership-mysql.erm)
+- **Open a file** — Ctrl+O, or drag an `.erm` file onto the window
+- **Generate SQL** — File › Export › DDL
 
 ## Differences from ERMaster
 
@@ -128,14 +119,13 @@ Relio does everything ERMaster does, with known problems fixed. For example:
 - DDL that used to fail on some databases is fixed and tested against old and current versions of 9 databases.
 - Test data SQL no longer breaks on single quotes or empty values.
 - Excel export uses `.xlsx` (ERMaster `.xls` templates still work).
-- Table boxes always fit their content — no empty space after deleting columns, and no cut-off text on tables stored too narrow. Connection ends always sit on the table border.
-- Only the drawing changes; sizes and positions stored in the file stay as they are, so opening and saving alone causes no diffs when you share files with ERMaster users.
+- Table boxes always fit their content. Only the drawing changes; sizes and positions stored in the file stay as they are.
 
 ## User guide
 
-Shortcuts, database connections, merging and design checks, the command line (export, import, compare, merge, check), where settings and backups are stored, and troubleshooting are in the **user guide**.
+Shortcuts, database connections, merging and design checks, the command line, AI tool connection, where settings and backups are stored, and troubleshooting are in the **user guide**.
 - In the app: Help › User guide
-- Online: [User guide](manual/en.md) · [사용 설명서 (Korean)](manual/ko.md)
+- On the web: [Relio website ↗](https://relio-hq.github.io/relio/en/) · [User guide](manual/en.md) · [사용 설명서 (Korean)](manual/ko.md)
 
 ## Report a problem · Suggest an idea
 
